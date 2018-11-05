@@ -6,8 +6,24 @@ app.listen(process.env.PORT || 8080);
 
 
 app.get('/', (req, res) => {
-  res.render('index.html')
+  res.render('home.html')
 })
+
+// app.get('/business', (req, res) => {
+//   res.render('business.html')
+// })
+
+// app.get('/listings', (req, res) => {
+//   res.render('listings.html')
+// })
+
+// app.get('/login', (req, res) => {
+//   res.render('login.html')
+// })
+
+// app.get('/sign-up', (req, res) => {
+//   res.render('sign-up.html')
+// })
 
 
 // function runServer() {
