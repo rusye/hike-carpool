@@ -6,7 +6,8 @@
   "dependencies": {
     "express": "^4.16.4",
     "mongoose": "^5.3.11",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
