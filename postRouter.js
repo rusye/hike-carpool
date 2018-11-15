@@ -5,7 +5,7 @@ const jsonParser = bodyParser.json();
 const ObjectID = require('mongodb').ObjectID;
 
 const {Posts} = require('./models');
-const {User} = require('./user/models');
+const {User} = require('./users/models');
 
 // GET request for posts
 router.get('/', (req, res) => {

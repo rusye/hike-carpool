@@ -3,7 +3,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const passport = require('passport');
 const app = express();
+
+const {router: usersRouter} = require('./users');
+// const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 
 mongoose.Promise = global.Promise;
 

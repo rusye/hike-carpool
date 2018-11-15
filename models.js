@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-const {User} = require('./user/models');
+const {User} = require('./users/models');
 
 const postSchema = mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
