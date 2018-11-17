@@ -13,11 +13,11 @@ mongoose.Promise = global.Promise;
 
 const {DATABASE_URL, PORT} = require('./config');
 
+const app = express();
+
 app.use(express.static('public'));
 
 app.use(express.json());
-
-const app = express();
 
 app.use(morgan('common'));
 
@@ -57,7 +57,7 @@ let server;
 
 function runServer() {
 	return new Promise((resolve, reject) => {
-		mongoose.connect(DATABASE_URL, {useMongoClient: true}, err => {
+		mongoose.connect(DATABASE_URL, err => {
 			if (err) {
 				return reject(err);
 			}
@@ -90,7 +90,7 @@ function closeServer() {
 }
 
 if (require.main === module) {
-  runServer().catch(err => console.error(err));
+  runServer(DATABASE_URL).catch(err => console.error(err));
 }
 
 module.exports = { app, runServer, closeServer };
