@@ -8,7 +8,7 @@ const {Posts} = require('./models');
 const {User} = require('./users/models');
 
 // GET request for posts
-router.get('/', (req, res) => {
+router.get('/posts', (req, res) => {
   Posts.find()
     .then(posts => {
       res.json(posts.map(post => {
@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
 });
 
 // GET request for post by id
-router.get('/:id', (req, res) => {
+router.get('/posts/:id', (req, res) => {
   Posts.find()
     .then(posts => {
       res.json(posts.map(post => {
@@ -50,7 +50,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST for posts
-router.post('/', (req, res) => {
+router.post('/posts', (req, res) => {
   const requiredFields = ['hikename', 'openseats', 'content', 'user_id'];
   requiredFields.forEach(field => {
     if (!(field in req.body)) {
@@ -98,7 +98,7 @@ router.post('/', (req, res) => {
 });
 
 // PUT request for posts
-router.put('/:id', (req, res) => {
+router.put('/posts/:id', (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({message: `ID's do not match`});
   }
@@ -117,7 +117,7 @@ router.put('/:id', (req, res) => {
     .catch(err => res.status(500).json({message: 'Something went wrong'}));
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/posts/:id', (req, res) => {
   Posts
     .findByIdAndRemove(req.params.id)
     .then(post => res.status(204).end())
