@@ -13,7 +13,7 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-const databaseUrl = DATABASE_URL;
+const databaseUrl = TEST_DATABASE_URL;
 const port = PORT;
 
 describe('Protected endpoint', function() {

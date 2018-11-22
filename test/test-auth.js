@@ -1,7 +1,5 @@
 'use strict';
 
-global.DATABASE_URL = 'mongodb://localhost/test-hiking-app';
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const jwt = require('jsonwebtoken');
@@ -15,7 +13,7 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-const databaseUrl = DATABASE_URL;
+const databaseUrl = TEST_DATABASE_URL;
 const port = PORT;
 
 describe('Auth endpoints', function() {

@@ -18,7 +18,7 @@ function tearDownDb () {
   return mongoose.connection.dropDatabase();
 };
 
-const databaseUrl = DATABASE_URL;
+const databaseUrl = TEST_DATABASE_URL;
 const port = PORT;
 
 describe('/api/user', function() {
