@@ -10,7 +10,7 @@ const expect = chai.expect;
 const {Posts} = require('../models');
 const {User} = require('../users/models');
 const {app, runServer, closeServer} = require('../server');
-const {TEST_DATABASE_URL} = require('../config');
+const {TEST_DATABASE_URL, PORT} = require('../config');
 
 chai.use(chaiHttp);
 
@@ -22,6 +22,16 @@ function seedPostData() {
     seedData.push(generatePostData())
   }
   return Posts.insertMany(seedData);
+};
+
+function seedUserData() {
+  console.info('seeding user data')
+  const seedUserData = [];
+
+  for (let i=1; i<10; i++) {
+    seedUserData.push(generateUserData())
+  }
+  return User.insertMany(seedUserData);
 };
 
 function generatePostData() {
@@ -48,14 +58,17 @@ function tearDownDb() {
   return mongoose.connection.dropDatabase();
 };
 
+const databaseUrl = TEST_DATABASE_URL;
+const port = PORT;
+
 describe('Hike Posts API resource', function() {
 
   before(function() {
-    return runServer(TEST_DATABASE_URL);
+    return runServer(databaseUrl);
   });
 
   beforeEach(function() {
-    return seedPostData();
+    return seedPostData() && seedUserData();
   });
 
   afterEach(function() {
@@ -121,23 +134,17 @@ describe('Hike Posts API resource', function() {
 
   describe('POST endpoint', function() {
     it('Should add a new post', function() {
-      const newUser = generateUserData();
-      // return User.create(newUser);
-
-      
-
-      // console.log(JSON.stringify(newUser));
-      return chai.request(app).post('/api/users').send(newUser)
+      return User.findOne()
         .then(userData => {
+          console.log(userData);
           let newPost = {
-            user_id: userData.body.id,
-            user: newUser.username,
+            user_id: userData._id,
+            user: userData.username,
             hikename: faker.lorem.words(),
             openseats: faker.random.number(),
             content: faker.lorem.sentence()
           };
-          // console.log(userData.body.id);
-          // newPost.user_id = userData.text.id;
+          
           return chai.request(app).post('/posts').send(newPost)
             .then(res => {
               expect(res).to.have.status(201);
