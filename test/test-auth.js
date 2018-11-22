@@ -9,10 +9,14 @@ const jwt = require('jsonwebtoken');
 const {app, runServer, closeServer} = require('../server');
 const {User} = require('../users');
 const {JWT_SECRET} = require('../config');
+const {TEST_DATABASE_URL, PORT} = require('../config');
 
 const expect = chai.expect;
 
 chai.use(chaiHttp);
+
+const databaseUrl = DATABASE_URL;
+const port = PORT;
 
 describe('Auth endpoints', function() {
   const username = 'exampleUser';
@@ -21,7 +25,7 @@ describe('Auth endpoints', function() {
   const lastName = 'User';
 
   before(function() {
-    return runServer();
+    return runServer(databaseUrl);
   });
 
   after(function() {

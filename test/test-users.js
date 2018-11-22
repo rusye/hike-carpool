@@ -1,7 +1,5 @@
 'use strict';
 
-// global.DATABASE_URL = 'mongodb://localhost/test-hiking-app';
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const faker = require('faker');
@@ -9,7 +7,7 @@ const mongoose = require('mongoose');
 
 const {app, runServer, closeServer} = require('../server');
 const {User} = require('../users');
-const {TEST_DATABASE_URL} = require('../config');
+const {TEST_DATABASE_URL, PORT} = require('../config');
 
 const expect = chai.expect;
 
@@ -19,6 +17,9 @@ function tearDownDb () {
   console.warn('Deleting database');
   return mongoose.connection.dropDatabase();
 };
+
+const databaseUrl = DATABASE_URL;
+const port = PORT;
 
 describe('/api/user', function() {
   const username = faker.internet.userName();
@@ -34,7 +35,7 @@ describe('/api/user', function() {
   const emailB = faker.internet.email();
 
   before(function() {
-    return runServer(TEST_DATABASE_URL)
+    return runServer(databaseUrl)
   });
 
   afterEach(function() {
