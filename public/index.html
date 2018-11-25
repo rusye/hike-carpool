@@ -1,1 +1,40 @@
-Hello world.
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Looking to carpool on a hike? See and share hikes.">
+    <title>Hike Carpool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Courgette|Poiret+One" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="index.css">
+  </head>
+
+  <body>
+    <nav role='navigation' class='nav-bar'>
+      <button class='loggedIn homeButton' hidden>Home</button>
+      <button class='loggedIn profileButton' hidden>My Profile</button>
+      <button class='loggedIn logout' hidden>Logout</button>
+      <button class='notLoggedIn login'>Login</button>
+      <button class='notLoggedIn register'>Register</button>
+    </nav>
+
+    <main role='main'>
+      <section id='introPage' role='region'>
+        <header>
+          <h1>Hike Carpool</h1>
+          <p>Hike Carpool is a blog dedicated to helping hikers find other hikers that have room in their 
+            car's when they are going hiking or even share when they have room in their own cars.</p>
+        </header>
+      </section>
+
+      <section class='modal formLoginRegister' aria-live='assertive'> <!-- removed id='id01' -->
+      </section>
+
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="form-templates.js"></script>
+      <script type="text/javascript" src="index.js"></script>
+    </main>
+  </body>
+</html>
