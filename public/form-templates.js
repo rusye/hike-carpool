@@ -51,11 +51,11 @@ function registerTemplate() {
             </label>
 
             <label><b>First Name</b>
-              <input name='firstname' type='text' id='registerFirstName' placeholder='Enter First Name'>
+              <input name='firstName' type='text' id='registerFirstName' placeholder='Enter First Name'>
             </label>
 
             <label><b>Last Name</b>
-              <input name='lastname' type='text' id='registerLastName' placeholder='Enter Last Name'>
+              <input name='lastName' type='text' id='registerLastName' placeholder='Enter Last Name'>
             </label>
 
             <label><b>Email</b>

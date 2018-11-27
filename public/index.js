@@ -97,11 +97,33 @@ function logInSubmit() {
 function registerSubmit() {
   $('form').on('submit', function(e) {
     e.preventDefault();
-    console.log('username: '+$('input[name="username"]').val() + ' password: '+ $('input[name="password"]').val());
-    removeForm();
+    let formData = $(this).serialize();
+    // console.log(formData);
+    registerUser(formData);
+    // use a callback
+    // console.log('username: '+$('input[name="username"]').val() + ' password: '+ $('input[name="password"]').val());
+    // somefunction(user)
+    // removeForm();
   });
 };
 
+function registerUser(newUserData) {
+  console.log(newUserData);
+  $.ajax({
+    url: '/api/users',
+    method: 'POST',
+    data: newUserData,
+    dataType: 'json',
+    contentType: 'application/json',
+    success: function() {
+      console.log('I have created a user');
+    },
+    error: function(request, status, error) {
+      let message = 'There was a problem with your form: ' + request.responseText;
+      window.alert(message);
+    }
+  });
+};
 
 // +++++++++++++++++++++++++++++++++++
 // ++++++Nav bar after logging in+++++
