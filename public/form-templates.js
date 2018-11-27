@@ -38,23 +38,23 @@ function registerTemplate() {
           <legend>Register</legend>
           <section class='container'>
             <label><b>Username</b>
-              <input id='registerUsername' type='text' placeholder='Enter Desired Username' required>
+              <input name='username' id='registerUsername' type='text' placeholder='Enter Desired Username' required>
             </label>
 
             <label><b>Password</b>
-              <input type='password' id='registerPassword' placeholder='Set A Password' required>
+              <input name='password' type='password' id='registerPassword' placeholder='Set A Password' required>
             </label>
 
             <label><b>First Name</b>
-              <input type='text' id='registerFirstName' placeholder='Enter First Name'>
+              <input name='firstname' type='text' id='registerFirstName' placeholder='Enter First Name'>
             </label>
 
             <label><b>Last Name</b>
-              <input type='text' id='registerLastName' placeholder='Enter Last Name'>
+              <input name='lastname' type='text' id='registerLastName' placeholder='Enter Last Name'>
             </label>
 
             <label><b>Email</b>
-              <input type='email' id='registerEmail' placeholder='Enter Email'>
+              <input name='email' type='email' id='registerEmail' placeholder='Enter Email'>
             </label>
 
             <button class='formLoginRegisterButton registerSubmit' type='submit'>Register</button>
