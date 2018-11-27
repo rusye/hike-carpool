@@ -3,28 +3,30 @@
 function logInTemplate() {
   // move the onclick into javascript somehow
   return `
-    <!-- <section class='modal formLoginRegister' aria-live='assertive'> --> <!-- removed id='id01' -->
-      <form class='modal-content animate' action=''>
+      <form id='loginForm' class='modal-content animate' action=''>
+        <section class="imgcontainer">
+          <span class="close" title="Close Modal">&times;</span>
+        </section>
+
         <fieldset>
           <legend>Login</legend>
           <section class='container'>
             <label><b>Username</b>
-              <input type='text' placeholder='Enter Username' required>
+              <input name='username' type='text' placeholder='Enter Username' required>
             </label>
 
             <label><b>Password</b>
-              <input type='password' placeholder='Enter Password' required>
+              <input name='password' type='password' placeholder='Enter Password' required>
             </label>
 
-            <button class='formLoginRegisterButton logInSubmit' type='submit'>Login</button>
-          </section>
+            <section class='formButtons'>
+              <button class='formLoginRegisterButton' type='submit'>Login</button>
 
-          <section class='container' style='background-color:#f1f1f1'>
-            <button type='button' class='cancelbtn'>Cancel</button>
+              <button type='button' class='cancelbtn '>Cancel</button>
+            </section>
           </section>
         </fieldset>
       </form>
-      <!-- </section> -->
   `
 };
 
@@ -32,8 +34,11 @@ function logInTemplate() {
 
 function registerTemplate() {
   return `
-  <!--<section class='modal formLoginRegister' aria-live='assertive'> --> <!-- removed id='id01' -->
       <form id='registerForm' class='modal-content animate' action=''>
+        <section class="imgcontainer">
+          <span class="close" title="Close Modal">&times;</span>
+        </section>
+
         <fieldset>
           <legend>Register</legend>
           <section class='container'>
@@ -57,14 +62,12 @@ function registerTemplate() {
               <input name='email' type='email' id='registerEmail' placeholder='Enter Email'>
             </label>
 
-            <button class='formLoginRegisterButton registerSubmit' type='submit'>Register</button>
-          </section>
-
-          <section class='container' style='background-color:#f1f1f1'>
-            <button type='button' class='cancelbtn'>Cancel</button>
+            <section class='formButtons'>
+              <button class='formLoginRegisterButton' type='submit'>Register</button>
+              <button type='button' class='cancelbtn '>Cancel</button>
+            </section>
           </section>
         </fieldset>
       </form>
-      <!--</section> -->
   `
 };

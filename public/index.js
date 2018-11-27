@@ -21,9 +21,10 @@ function logInButton() {
     // document.getElementsByClassName('formLoginRegister')[0].style.display = 'block';
     modal.style.display = 'block';
     logInSubmit();
-    loginRegisterFormCancelButton();
-    clickOutsideOfLoginRegisterForm();
-    // successfulLogIn();
+    closingLoginRegisterForm();
+    // loginRegisterFormCancelButton();
+    // loginRegisterFormX();
+    // clickOutsideOfLoginRegisterForm();
   });
 };
 
@@ -35,10 +36,19 @@ function registerButton() {
     // document.getElementsByClassName('formLoginRegister')[0].style.display = 'block';
     modal.style.display = 'block';
     registerSubmit();
-    loginRegisterFormCancelButton();
-    clickOutsideOfLoginRegisterForm();
+    closingLoginRegisterForm();
+    // loginRegisterFormCancelButton();
+    // loginRegisterFormX();
+    // clickOutsideOfLoginRegisterForm();
   })
 };
+
+// Fires up the form closing listeners
+function closingLoginRegisterForm() {
+  loginRegisterFormCancelButton();
+  loginRegisterFormX();
+  clickOutsideOfLoginRegisterForm();
+}
 
 // Form will close when you click outside of it
 function clickOutsideOfLoginRegisterForm() {
@@ -46,8 +56,6 @@ function clickOutsideOfLoginRegisterForm() {
   window.onclick = function(e) {
     if (e.target == modal) {
       removeForm();
-        // modal.style.display = "none";
-        // $('.modal-content').remove();
     };
   };
 };
@@ -61,19 +69,35 @@ function loginRegisterFormCancelButton() {
   });
 };
 
+// Close form when clicking on X
+function loginRegisterFormX() {
+  $('.modal').on('click', '.close', function(e) {
+    e.preventDefault();
+    removeForm();
+  });
+};
+
 // Hide's the form and clear it's contents
 function removeForm() {
   modal.style.display = "none";
   $('.modal-content').remove();
 };
 
-function logInSubmit() {};
+// Will handle logging in
+function logInSubmit() {
+  $('form').on('submit', function(e) {
+    e.preventDefault();
+    console.log('username: '+$('input[name="username"]').val() + ' password: '+ $('input[name="password"]').val());
+    removeForm();
+    successfulLogIn();
+  });
+};
 
-// Will you submit your registration form
+// Will submit your registration form
 function registerSubmit() {
   $('form').on('submit', function(e) {
     e.preventDefault();
-    console.log('username: '+$('input[name="username"]').val() + ' password '+ $('input[name="password"]').val());
+    console.log('username: '+$('input[name="username"]').val() + ' password: '+ $('input[name="password"]').val());
     removeForm();
   });
 };
