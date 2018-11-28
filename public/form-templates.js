@@ -12,11 +12,11 @@ function logInTemplate() {
           <legend>Login</legend>
           <section class='container'>
             <label><b>Username</b>
-              <input name='username' type='text' placeholder='Enter Username' required>
+              <input name='username' type='text' placeholder='required' required>
             </label>
 
             <label><b>Password</b>
-              <input name='password' type='password' placeholder='Enter Password' required>
+              <input name='password' type='password' placeholder='required' required>
             </label>
 
             <section class='formButtons'>
