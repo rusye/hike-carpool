@@ -97,8 +97,18 @@ function logInSubmit() {
 function registerSubmit() {
   $('form').on('submit', function(e) {
     e.preventDefault();
-    let formData = $(this).serialize();
-    // console.log(formData);
+    // let form = {
+    //   'username': $('input[name="username"]').val()
+    // let formData = JSON.stringify($('#registerForm').serializeArray());
+    let formData = {
+      username: $('input[name="username"]').val(),
+      password: $('input[name="password"]').val(),
+      firstName: $('input[name="firstName"]').val(),
+      lastName: $('input[name="lastName"]').val(),
+      email: $('input[name="email"]').val()
+    }
+    // }
+    console.log(formData);
     registerUser(formData);
     // use a callback
     // console.log('username: '+$('input[name="username"]').val() + ' password: '+ $('input[name="password"]').val());
@@ -112,14 +122,14 @@ function registerUser(newUserData) {
   $.ajax({
     url: '/api/users',
     method: 'POST',
-    data: newUserData,
+    data: JSON.stringify(newUserData),
     dataType: 'json',
     contentType: 'application/json',
     success: function() {
       console.log('I have created a user');
     },
-    error: function(request, status, error) {
-      let message = 'There was a problem with your form: ' + request.responseText;
+    error: function(data) {
+      let message = 'There was a problem with your form: ' + data.responseText.message;
       window.alert(message);
     }
   });
