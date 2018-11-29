@@ -2,6 +2,8 @@
 
 const modal = document.getElementsByClassName('formLoginRegister')[0];
 
+const home = document.getElementsByClassName('loadedHome')[0];
+
 
 // ++++++++++++++++++++++++++++++++++++
 // ++++++Nav bar before logging in+++++
@@ -11,6 +13,12 @@ const modal = document.getElementsByClassName('formLoginRegister')[0];
 // Will display user content
 function successfulLogIn() {
   $('.loggedIn, .notLoggedIn').toggle();
+  loadHome();
+};
+
+// Will load the main screen with all posts visible
+function loadHome() {
+  home.style.display = 'block';
 };
 
 // Will open the login form
@@ -87,9 +95,25 @@ function removeForm() {
 function logInSubmit() {
   $('form').on('submit', function(e) {
     e.preventDefault();
-    console.log('username: '+$('input[name="username"]').val() + ' password: '+ $('input[name="password"]').val());
-    removeForm();
-    successfulLogIn();
+    let formData = {
+      username: $('input[name="username"]').val(),
+      password: $('input[name="password"]').val()
+    };
+    $.ajax({
+      url: '/api/auth/login',
+      method: 'POST',
+      data: JSON.stringify(formData),
+      dataType: 'json',
+      contentType: 'application/json',
+      success: function() {
+        removeForm();
+        successfulLogIn();
+      },
+      error: function(data) {
+        let message = 'There was a problem logging in. ' + data.responseText;
+        window.alert(message);
+      } 
+    });
   });
 };
 
@@ -97,28 +121,18 @@ function logInSubmit() {
 function registerSubmit() {
   $('form').on('submit', function(e) {
     e.preventDefault();
-    // let form = {
-    //   'username': $('input[name="username"]').val()
-    // let formData = JSON.stringify($('#registerForm').serializeArray());
     let formData = {
       username: $('input[name="username"]').val(),
       password: $('input[name="password"]').val(),
       firstName: $('input[name="firstName"]').val(),
       lastName: $('input[name="lastName"]').val(),
       email: $('input[name="email"]').val()
-    }
-    // }
-    console.log(formData);
+    };
     registerUser(formData);
-    // use a callback
-    // console.log('username: '+$('input[name="username"]').val() + ' password: '+ $('input[name="password"]').val());
-    // somefunction(user)
-    // removeForm();
   });
 };
 
 function registerUser(newUserData) {
-  console.log(newUserData);
   $.ajax({
     url: '/api/users',
     method: 'POST',
@@ -126,7 +140,7 @@ function registerUser(newUserData) {
     dataType: 'json',
     contentType: 'application/json',
     success: function() {
-      console.log('I have created a user');
+      removeForm();
     },
     error: function(data) {
       let message = 'There was a problem with your form: ' + data.responseText.message;
@@ -146,6 +160,14 @@ function logOutButton() {
     e.preventDefault();
     $('.loggedIn, .notLoggedIn').toggle();
   });
+};
+
+// Will divert you to the home page
+function homeButton() {
+  $('.homeButton').on('click', function(e) {
+    e.preventDefault();
+    loadHome();
+  })
 };
 
 function loadListeners() {

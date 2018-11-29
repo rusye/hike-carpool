@@ -118,6 +118,11 @@ span.psw {
     animation: animatezoom 0.6s
 }
 
+/* Home page display */
+.loadedHome {
+    display: none;
+}
+
 @-webkit-keyframes animatezoom {
     from {-webkit-transform: scale(0)} 
     to {-webkit-transform: scale(1)}
