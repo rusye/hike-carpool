@@ -70,8 +70,24 @@ function registerTemplate() {
   `
 };
 
-function loadHome() {`
-  <section class='welcome'>
-  <h1></h1>
-  </section>
-`};
+// remove span in welcome and pull user
+function loadHomeTemplate(posts) {
+  posts.forEach(post => {
+    $('main').append(`
+      <section id='allPosts'>
+          <h2>${post.hikename}</h2>
+          <p>${post.date}</p>
+
+          <section id='userAndSeats'>
+            <h3>${post.user}</h3>
+            <h3>${post.openseats}</h3>
+          </section>
+
+          <section id='postContent'>
+            <p>${post.content}</p>
+          </section>
+        </section>
+      </section>
+    `);
+  });
+};

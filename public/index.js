@@ -4,6 +4,9 @@ const modal = document.getElementsByClassName('formLoginRegister')[0];
 
 const home = document.getElementsByClassName('loadedHome')[0];
 
+// let currentUserToken;
+// Might remove that global variable, going to pass along the data with user id and name
+
 
 // ++++++++++++++++++++++++++++++++++++
 // ++++++Nav bar before logging in+++++
@@ -11,14 +14,27 @@ const home = document.getElementsByClassName('loadedHome')[0];
 
 
 // Will display user content
-function successfulLogIn() {
-  $('.loggedIn, .notLoggedIn').toggle();
-  loadHome();
-};
+// Don't need a function for one line of code
+// function successfulLogIn() {
+//   $('.loggedIn, .notLoggedIn').toggle();
+//   loadHome();
+// };
 
 // Will load the main screen with all posts visible
-function loadHome() {
-  home.style.display = 'block';
+function loadHome(user) {
+  $('.nav-bar').append(`<span id='userInNav'>Welcome, ${user.username}!</span>`);
+  $.ajax({
+    url: '/posts',
+    method: 'GET',
+    dataType: 'json',
+    contentType: 'application/json',
+    success: function(posts) {
+      console.log(posts);
+      // $('main').append(loadHomeTemplate(posts));
+      loadHomeTemplate(posts);
+      home.style.display = 'block';
+    }
+  })
 };
 
 // Will open the login form
@@ -105,9 +121,14 @@ function logInSubmit() {
       data: JSON.stringify(formData),
       dataType: 'json',
       contentType: 'application/json',
-      success: function() {
+      success: function(data) {
+        // console.log(data.user.id);
+        // currentUserToken = formData.username;
+        // console.log(currentUserToken);
         removeForm();
-        successfulLogIn();
+        // successfulLogIn();
+        $('.loggedIn, .notLoggedIn, #introPage').toggle();
+        loadHome(data.user);
       },
       error: function(data) {
         let message = 'There was a problem logging in. ' + data.responseText;
