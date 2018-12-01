@@ -1,11 +1,10 @@
 'use strict';
 
 function logInTemplate() {
-  // move the onclick into javascript somehow
   return `
     <form id='loginForm' class='modal-content animate' action=''>
       <section class="imgcontainer">
-        <span class="close" title="Close Modal">&times;</span>
+        <span class="close" title="Close Form">&times;</span>
       </section>
 
       <fieldset>
@@ -34,7 +33,7 @@ function registerTemplate() {
   return `
     <form id='registerForm' class='modal-content animate' action=''>
       <section class="imgcontainer">
-        <span class="close" title="Close Modal">&times;</span>
+        <span class="close" title="Close Form">&times;</span>
       </section>
 
       <fieldset>
@@ -70,11 +69,10 @@ function registerTemplate() {
   `
 };
 
-// remove span in welcome and pull user
-function loadHomeTemplate(posts) {
+function displayAllPostsTemplate(posts) {
   posts.forEach(post => {
     $('.posts').prepend(`
-      <section id='allPosts'>
+      <section id='individualPosts'>
           <h2>${post.hikename}</h2>
           <p>${post.date}</p>
 
@@ -96,7 +94,7 @@ function newHikePost() {
   return `
       <form id='newHikePost' class='modal-content animate' action=''>
         <section class="imgcontainer">
-          <span class="close" title="Close Modal">&times;</span>
+          <span class="close" title="Close Form">&times;</span>
         </section>
 
         <fieldset>
