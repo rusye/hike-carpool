@@ -11,8 +11,7 @@ const home = document.getElementsByClassName('loadedHome')[0];
 
 
 // Will load the main screen with all posts visible
-function loadHome(user) {
-  $('.nav-bar').append(`<span id='userInNav'>Welcome, ${user.username}!</span>`);
+function getAllPosts() {
   $.ajax({
     url: '/posts',
     method: 'GET',
@@ -20,7 +19,7 @@ function loadHome(user) {
     contentType: 'application/json',
     success: function(posts) {
       console.log(posts);
-      loadHomeTemplate(posts);
+      displayAllPostsTemplate(posts);
       home.style.display = 'block';
     }
   })
@@ -30,8 +29,8 @@ function loadHome(user) {
 function logInButton() {
   $('.login').on('click', function(e) {
     e.preventDefault();
-    closeAForm();
     $('.forms').append(logInTemplate);
+    closeAForm();
     modal.style.display = 'block';
     logInSubmit();
   });
@@ -41,8 +40,8 @@ function logInButton() {
 function registerButton() {
   $('.register').on('click', function(e) {
     e.preventDefault();
-    closeAForm();
     $('.forms').append(registerTemplate);
+    closeAForm();
     modal.style.display = 'block';
     registerSubmit();
   })
@@ -101,11 +100,13 @@ function logInSubmit() {
       dataType: 'json',
       contentType: 'application/json',
       success: function(data) {
+        console.log(data.user);
         console.log(data.user.id);
         removeForm();
         $('.loggedIn, .notLoggedIn, #introPage').toggle();
-        loadHome(data.user);
-        loadListenersUponLogin(data.user.id);
+        $('.nav-bar').append(`<span id='userInNav'>Welcome, ${data.user.username}!</span>`);
+        getAllPosts();
+        loadListenersUponLogin(data.user.username, data.user.id);
       },
       error: function(data) {
         let message = 'There was a problem logging in. ' + data.responseText;
@@ -139,6 +140,8 @@ function registerUser(newUserData) {
     contentType: 'application/json',
     success: function() {
       removeForm();
+      let message = 'Create some popup giving them instructions to login now';
+      window.alert(message);
     },
     error: function(data) {
       let message = 'There was a problem with your form: ' + data.responseText.message;
@@ -166,31 +169,81 @@ function logOutButton() {
 function homeButton() {
   $('.homeButton').on('click', function(e) {
     e.preventDefault();
-    loadHome();
+    getAllPosts();
   })
 };
 
 // This will load all of your posts
-function myHikesButton() {};
+function myHikesButton(userName) {
+  $('.myHikesButton').on('click', function(e) {
+    e.preventDefault();
+    home.style.display = 'none';
+    $.ajax({
+      url: `/posts/${userName}`,
+      method: 'GET',
+      data: {user: userName},
+      dataType: 'json',
+      contentType: 'application/json',
+      success: function(posts) {
+        console.log(posts);
+        displayAllPostsTemplate(posts);
+        home.style.display = 'block';
+      }
+    });
+  })
+};
 
 // This will load the form for new hikes
 function newHikeButton(userID) {
   $('.makeNewPost').on('click', function(e) {
     e.preventDefault();
-    closeAForm();
     $('.forms').append(newHikePost);
+    closeAForm();
     modal.style.display = 'block';
     newHikeSubmit(userID);
   })
 };
 
 // This will submit the new post
-function newHikeSubmit(userID) {};
+function newHikeSubmit(userID) {
+  $('form').on('submit', function(e) {
+    e.preventDefault();
+    let formData = {
+      user_id: userID,
+      hikename: $('input[name="hikename"]').val(),
+      openseats: $('input[name="openseats"]').val(),
+      content: $('input[name="content"]').val()
+    };
+    postNewHike(formData);
+  })
+};
+
+// This will post the new post to the database
+function postNewHike(newPostData) {
+  console.log(newPostData);
+  $.ajax({
+    url: '/posts',
+    method: 'POST',
+    data: JSON.stringify(newPostData),
+    dataType: 'json',
+    contentType: 'application/json',
+    success: function(data) {
+      removeForm();
+      let message = 'success! remove me later';
+      window.alert(message);
+      getAllPosts();
+    },
+    error: function(data) {
+      let message = 'There was a problem with your form: ' + data.responseText.message;
+      window.alert(message);
+    }
+  });
+};
 
 // Load additional listeners upon login
-function loadListenersUponLogin(userID) {
+function loadListenersUponLogin(userName, userID) {
   logOutButton();
-  myHikesButton(userID);
+  myHikesButton(userName);
   homeButton();
   newHikeButton(userID);
 };
