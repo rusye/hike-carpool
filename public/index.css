@@ -51,7 +51,7 @@ input[type=text], input[type=password], input[type=number], input[type=email] {
 /* Center the image and position the close button */
 .imgcontainer {
     text-align: center;
-    margin: 24px 0 12px 0;
+    /* margin: 24px 0 12px 0; */
     position: relative;
 }
 
@@ -99,11 +99,16 @@ span.psw {
 /* The Close Button (x) */
 .close {
   position: absolute;
-  right: 25px;
+  right: 10px;
   top: 0;
   color: #000;
   font-size: 35px;
   font-weight: bold;
+  padding-top: 2px;
+}
+
+fieldset {
+    border: none;
 }
 
 .close:hover,
@@ -125,6 +130,12 @@ span.psw {
 
 #allPosts {
     border: solid 2px blue;
+}
+
+legend {
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 10px;
 }
 
 @-webkit-keyframes animatezoom {
