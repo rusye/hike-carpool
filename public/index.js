@@ -1,6 +1,6 @@
 'use strict';
 
-const modal = document.getElementsByClassName('formLoginRegister')[0];
+const modal = document.getElementsByClassName('forms')[0];
 
 const home = document.getElementsByClassName('loadedHome')[0];
 
@@ -41,8 +41,8 @@ function loadHome(user) {
 function logInButton() {
   $('.login').on('click', function(e) {
     e.preventDefault();
-    $('.formLoginRegister').append(logInTemplate);
-    // document.getElementsByClassName('formLoginRegister')[0].style.display = 'block';
+    $('.forms').append(logInTemplate);
+    // document.getElementsByClassName('forms')[0].style.display = 'block';
     modal.style.display = 'block';
     logInSubmit();
     closingLoginRegisterForm();
@@ -56,8 +56,8 @@ function logInButton() {
 function registerButton() {
   $('.register').on('click', function(e) {
     e.preventDefault();
-    $('.formLoginRegister').append(registerTemplate);
-    // document.getElementsByClassName('formLoginRegister')[0].style.display = 'block';
+    $('.forms').append(registerTemplate);
+    // document.getElementsByClassName('forms')[0].style.display = 'block';
     modal.style.display = 'block';
     registerSubmit();
     closingLoginRegisterForm();
@@ -76,7 +76,7 @@ function closingLoginRegisterForm() {
 
 // Form will close when you click outside of it
 function clickOutsideOfLoginRegisterForm() {
-  // let modal = document.getElementsByClassName('formLoginRegister')[0];
+  // let modal = document.getElementsByClassName('forms')[0];
   window.onclick = function(e) {
     if (e.target == modal) {
       removeForm();
@@ -86,7 +86,7 @@ function clickOutsideOfLoginRegisterForm() {
 
 // Close's the form
 function loginRegisterFormCancelButton() {
-  // let modal = document.getElementsByClassName('formLoginRegister')[0];
+  // let modal = document.getElementsByClassName('forms')[0];
   $('.modal').on('click', '.cancelbtn', function(e) {
     e.preventDefault();
     removeForm();
@@ -122,13 +122,11 @@ function logInSubmit() {
       dataType: 'json',
       contentType: 'application/json',
       success: function(data) {
-        // console.log(data.user.id);
-        // currentUserToken = formData.username;
-        // console.log(currentUserToken);
+        console.log(data.user.id);
         removeForm();
-        // successfulLogIn();
         $('.loggedIn, .notLoggedIn, #introPage').toggle();
         loadHome(data.user);
+        loadListenersUponLogin(data.user.id);
       },
       error: function(data) {
         let message = 'There was a problem logging in. ' + data.responseText;
@@ -193,14 +191,21 @@ function homeButton() {
   })
 };
 
-function myPosts() {};
+function myHikesButton() {};
 
+function newHikeButton() {};
 
-function loadListeners() {
+function loadListenersUponLogin(userID) {
+  logOutButton();
+  myHikesButton(userID);
+  homeButton();
+  newHikeButton(userID);
+};
+
+function loadInitialListeners() {
   logInButton();
   clickOutsideOfLoginRegisterForm();
-  logOutButton();
   registerButton();
 };
 
-$(loadListeners);
+$(loadInitialListeners);

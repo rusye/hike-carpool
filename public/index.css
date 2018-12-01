@@ -16,7 +16,7 @@ input[type=text], input[type=password], input[type=email] {
 }
 
 /* Set a style for all buttons */
-.formLoginRegisterButton {
+.formSubmitButton {
 	font-size: 17px;
 	background-color: #4CAF50;
 	color: white;
@@ -28,7 +28,7 @@ input[type=text], input[type=password], input[type=email] {
 	width: 50%;
 }
 
-.formLoginRegisterButton:hover {
+.formSubmitButton:hover {
     opacity: 0.8;
 }
 
@@ -124,7 +124,7 @@ span.psw {
 }
 
 #allPosts {
-    border: 2px blue;
+    border: solid 2px blue;
 }
 
 @-webkit-keyframes animatezoom {
@@ -139,7 +139,7 @@ span.psw {
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
-    .cancelbtn, .formLoginRegisterButton {
+    .cancelbtn, .formSubmitButton {
        width: 100%;
     }
 }
