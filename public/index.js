@@ -4,21 +4,11 @@ const modal = document.getElementsByClassName('forms')[0];
 
 const home = document.getElementsByClassName('loadedHome')[0];
 
-// let currentUserToken;
-// Might remove that global variable, going to pass along the data with user id and name
-
 
 // ++++++++++++++++++++++++++++++++++++
 // ++++++Nav bar before logging in+++++
 // ++++++++++++++++++++++++++++++++++++
 
-
-// Will display user content
-// Don't need a function for one line of code
-// function successfulLogIn() {
-//   $('.loggedIn, .notLoggedIn').toggle();
-//   loadHome();
-// };
 
 // Will load the main screen with all posts visible
 function loadHome(user) {
@@ -30,7 +20,6 @@ function loadHome(user) {
     contentType: 'application/json',
     success: function(posts) {
       console.log(posts);
-      // $('main').append(loadHomeTemplate(posts));
       loadHomeTemplate(posts);
       home.style.display = 'block';
     }
@@ -41,14 +30,10 @@ function loadHome(user) {
 function logInButton() {
   $('.login').on('click', function(e) {
     e.preventDefault();
+    closeAForm();
     $('.forms').append(logInTemplate);
-    // document.getElementsByClassName('forms')[0].style.display = 'block';
     modal.style.display = 'block';
     logInSubmit();
-    closingLoginRegisterForm();
-    // loginRegisterFormCancelButton();
-    // loginRegisterFormX();
-    // clickOutsideOfLoginRegisterForm();
   });
 };
 
@@ -56,27 +41,22 @@ function logInButton() {
 function registerButton() {
   $('.register').on('click', function(e) {
     e.preventDefault();
+    closeAForm();
     $('.forms').append(registerTemplate);
-    // document.getElementsByClassName('forms')[0].style.display = 'block';
     modal.style.display = 'block';
     registerSubmit();
-    closingLoginRegisterForm();
-    // loginRegisterFormCancelButton();
-    // loginRegisterFormX();
-    // clickOutsideOfLoginRegisterForm();
   })
 };
 
 // Fires up the form closing listeners
-function closingLoginRegisterForm() {
-  loginRegisterFormCancelButton();
-  loginRegisterFormX();
-  clickOutsideOfLoginRegisterForm();
+function closeAForm() {
+  formsCancelButton();
+  formsX();
+  clickOutsideOfForms();
 }
 
 // Form will close when you click outside of it
-function clickOutsideOfLoginRegisterForm() {
-  // let modal = document.getElementsByClassName('forms')[0];
+function clickOutsideOfForms() {
   window.onclick = function(e) {
     if (e.target == modal) {
       removeForm();
@@ -85,8 +65,7 @@ function clickOutsideOfLoginRegisterForm() {
 };
 
 // Close's the form
-function loginRegisterFormCancelButton() {
-  // let modal = document.getElementsByClassName('forms')[0];
+function formsCancelButton() {
   $('.modal').on('click', '.cancelbtn', function(e) {
     e.preventDefault();
     removeForm();
@@ -94,7 +73,7 @@ function loginRegisterFormCancelButton() {
 };
 
 // Close form when clicking on X
-function loginRegisterFormX() {
+function formsX() {
   $('.modal').on('click', '.close', function(e) {
     e.preventDefault();
     removeForm();
@@ -191,10 +170,24 @@ function homeButton() {
   })
 };
 
+// This will load all of your posts
 function myHikesButton() {};
 
-function newHikeButton() {};
+// This will load the form for new hikes
+function newHikeButton(userID) {
+  $('.makeNewPost').on('click', function(e) {
+    e.preventDefault();
+    closeAForm();
+    $('.forms').append(newHikePost);
+    modal.style.display = 'block';
+    newHikeSubmit(userID);
+  })
+};
 
+// This will submit the new post
+function newHikeSubmit(userID) {};
+
+// Load additional listeners upon login
 function loadListenersUponLogin(userID) {
   logOutButton();
   myHikesButton(userID);
@@ -202,9 +195,9 @@ function loadListenersUponLogin(userID) {
   newHikeButton(userID);
 };
 
+// Initial listeners that are needed when the page fist loads
 function loadInitialListeners() {
   logInButton();
-  clickOutsideOfLoginRegisterForm();
   registerButton();
 };
 
