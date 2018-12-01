@@ -73,7 +73,7 @@ function registerTemplate() {
 // remove span in welcome and pull user
 function loadHomeTemplate(posts) {
   posts.forEach(post => {
-    $('main').append(`
+    $('.posts').prepend(`
       <section id='allPosts'>
           <h2>${post.hikename}</h2>
           <p>${post.date}</p>
