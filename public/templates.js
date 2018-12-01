@@ -20,7 +20,7 @@ function logInTemplate() {
           </label>
 
           <section class='formButtons'>
-            <button class='formLoginRegisterButton' type='submit'>Login</button>
+            <button class='formSubmitButton' type='submit'>Login</button>
 
             <button type='button' class='cancelbtn '>Cancel</button>
           </section>
@@ -61,7 +61,7 @@ function registerTemplate() {
           </label>
 
           <section class='formButtons'>
-            <button class='formLoginRegisterButton' type='submit'>Register</button>
+            <button class='formSubmitButton' type='submit'>Register</button>
             <button type='button' class='cancelbtn '>Cancel</button>
           </section>
         </section>
@@ -90,4 +90,36 @@ function loadHomeTemplate(posts) {
       </section>
     `);
   });
+};
+
+function newHikePost() {
+  return `
+      <form id='newHikePost' class='modal-content animate' action=''>
+        <section class="imgcontainer">
+          <span class="close" title="Close Modal">&times;</span>
+        </section>
+
+        <fieldset>
+          <legend>New Hike</legend>
+          <section class='container'>
+            <label><b>Hike Name</b>
+              <input name='hikename' id='newHikeName' type='text' placeholder='required' required>
+            </label>
+
+            <label><b>Number of Open Seats</b>
+              <input name='openseats' id='newOpenSeats' type='number' max='14' placeholder='required' required>
+            </label>
+
+            <label><b>Description About Hike</b>
+              <input name='content' id='newContent' type='text' placeholder='required' required>
+            </label>
+
+            <section class='formButtons'>
+              <button class='formSubmitButton' type='submit'>Create New Hike</button>
+              <button type='button' class='cancelbtn '>Cancel</button>
+            </section>
+          </section>
+        </fieldset>
+      </form>
+  `
 };
