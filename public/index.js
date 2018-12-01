@@ -179,7 +179,9 @@ function registerUser(newUserData) {
 function logOutButton() {
   $('.logout').on('click', function(e) {
     e.preventDefault();
-    $('.loggedIn, .notLoggedIn').toggle();
+    $('.loggedIn, .notLoggedIn, #introPage').toggle();
+    $('#userInNav, #allPosts').remove();
+    home.style.display = 'none';
   });
 };
 
@@ -190,6 +192,9 @@ function homeButton() {
     loadHome();
   })
 };
+
+function myPosts() {};
+
 
 function loadListeners() {
   logInButton();
