@@ -30,18 +30,17 @@ router.get('/', (req, res) => {
 
 // GET request for post by id
 router.get('/:id', (req, res) => {
-  Posts.find()
-    .then(posts => {
-      res.json(posts.map(post => {
-        return {
+  Posts.findById(req.params.id)
+    .then(post => {
+      console.log(post);
+      res.json({
           id: post._id,
           hikename: post.hikename,
           user: post.user ? post.user.username: 'unknown',
           openseats: post.openseats,
           content: post.content,
           date: post.date
-        }
-      }))
+      });
     })
     .catch(err => {
       console.log(err);
