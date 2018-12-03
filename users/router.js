@@ -134,7 +134,7 @@ router.get('/', (req, res) => {
   .populate('posts')
     .then(users => {
       // console.log('user' + users);
-      res.json(users)})
+      res.json(users.map(user => user.serialize()))})
     .catch(err => res.status(500).json({message: 'Internal server error' + err}));
 });
 
