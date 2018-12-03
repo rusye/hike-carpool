@@ -1,8 +1,11 @@
+'use strict';
+
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const ObjectID = require('mongodb').ObjectID;
+const passport = require('passport');
 
 const {Posts} = require('./models');
 const {User} = require('./users/models');
@@ -10,6 +13,7 @@ const {User} = require('./users/models');
 // GET request for posts
 router.get('/', (req, res) => {
   Posts.find()
+  .populate('user')
     .then(posts => {
       res.json(posts.map(post => {
         return {
@@ -31,8 +35,8 @@ router.get('/', (req, res) => {
 // GET request for post by id
 router.get('/:id', (req, res) => {
   Posts.findById(req.params.id)
+  .populate('user')
     .then(post => {
-      console.log(post);
       res.json({
           id: post._id,
           hikename: post.hikename,
@@ -59,6 +63,8 @@ router.post('/', (req, res) => {
     }
   });
 
+  let postId = '';
+
   User
     .findById(req.body.user_id)
     .then(user => {
@@ -71,14 +77,27 @@ router.post('/', (req, res) => {
             content: req.body.content,
             date: req.body.date
           })
-          .then(post => res.status(201).json({
-            id: post.id,
-            user: user.username,
-            hikename: post.hikename,
-            openseats: post.openseats,
-            content: post.content,
-            date: post.date
-          }))
+          .then(post => {
+            // console.log(post._id);
+            postId = `${post._id}`;
+            console.log(postId);
+            nextStep();
+            // user.posts.push(post);
+            // user.save();
+            res.status(201).json({
+              id: post.id,
+              user: user.username,
+              hikename: post.hikename,
+              openseats: post.openseats,
+              content: post.content,
+              date: post.date
+            })
+          })
+          // .then(post => {
+          //   console.log(JSON.stringify(post));
+            // user.posts.push(post);
+            // user.save();
+          // })
           .catch(err => {
             console.error(err);
             res.status(500).json({message: 'Something went wrong'});
@@ -90,10 +109,21 @@ router.post('/', (req, res) => {
         return res.status(400).send(message);
       }
     })
+    
     .catch(err => {
       console.error(err);
       res.status(500).json({message: 'Something went wrong'});
     });
+
+  function nextStep() {
+    User.findByIdAndUpdate(
+    req.body.user_id, 
+    {$push: {posts: `ObjectID(${postId})`}},
+    {safe: true, upsert: true, new : true},
+    function(err, model) {
+      console.log(err);
+      })
+  };
 });
 
 // PUT request for posts
