@@ -108,8 +108,9 @@ router.post('/', jsonParser, (req, res) => {
         password: hash,
         firstName,
         lastName,
-        email,
-        "posts": ''
+        email
+        // "posts": ''
+        // I can't create posts key
         // Im supposed to create some kind of field for this but can't and the above gets this error:
         // { ValidationError: User validation failed: posts: Cast to ObjectID failed for value "" at path "posts"
         // { CastError: Cast to ObjectID failed for value "" at path "posts"
