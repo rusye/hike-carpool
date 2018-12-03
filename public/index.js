@@ -85,6 +85,13 @@ function removeForm() {
   $('.modal-content').remove();
 };
 
+// This will populate localStorage with the necessary items
+function populateStorage(data) {
+  localStorage.setItem('username', data.user.username);
+  localStorage.setItem('userID', data.user.id);
+  localStorage.setItem('token', data.authToken);
+};
+
 // Will handle logging in
 function logInSubmit() {
   $('form').on('submit', function(e) {
@@ -100,11 +107,10 @@ function logInSubmit() {
       dataType: 'json',
       contentType: 'application/json',
       success: function(data) {
-        console.log(data.user);
-        console.log(data.user.id);
+        populateStorage(data);
         removeForm();
         $('.loggedIn, .notLoggedIn, #introPage').toggle();
-        $('.nav-bar').append(`<span id='userInNav'>Welcome, ${data.user.username}!</span>`);
+        $('.nav-bar').append(`<span id='userInNav'>Welcome, ${localStorage.getItem('username')}!</span>`);
         getAllPosts();
         loadListenersUponLogin(data.user.username, data.user.id);
       },
@@ -162,6 +168,7 @@ function logOutButton() {
     $('.loggedIn, .notLoggedIn, #introPage').toggle();
     $('#userInNav, #allPosts').remove();
     home.style.display = 'none';
+    localStorage.clear();
   });
 };
 
@@ -179,13 +186,15 @@ function myHikesButton(userName) {
     e.preventDefault();
     home.style.display = 'none';
     $.ajax({
-      url: `/posts/${userName}`,
+      url: `/posts`,
       method: 'GET',
+      params: {user: userName},
       data: {user: userName},
       dataType: 'json',
       contentType: 'application/json',
       success: function(posts) {
-        console.log(posts);
+        console.log('find hike', posts);
+        $('.posts').empty();
         displayAllPostsTemplate(posts);
         home.style.display = 'block';
       }
