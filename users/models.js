@@ -5,13 +5,21 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
+const {Posts} = require('../models');
+
 const UserSchema = mongoose.Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   firstName: {type: String, default: ''},
   lastName: {type: String, default: ''},
-  email: String
+  email: String,
+  posts: {type: mongoose.Schema.Types.ObjectId, ref: 'Posts'}
 });
+
+// UserSchema.pre('find', function(next) {
+//   this.populate('posts');
+//   next();
+// });
 
 UserSchema.methods.serialize = function() {
   return {
@@ -19,7 +27,8 @@ UserSchema.methods.serialize = function() {
     username: this.username || '',
     firstName: this.firstName || '',
     lastName: this.lastName || '',
-    email: this.email
+    email: this.email,
+    posts: this.posts
   };
 };
 

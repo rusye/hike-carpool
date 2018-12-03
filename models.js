@@ -19,15 +19,15 @@ const postSchema = mongoose.Schema({
   date: {type: String, default: local}
 });
 
-postSchema.pre('find', function(next) {
-  this.populate('user');
-  next();
-});
+// postSchema.pre('find', function(next) {
+//   this.populate('user');
+//   next();
+// });
 
-postSchema.pre('findById', function(next) {
-  this.populate('user');
-  next();
-});
+// postSchema.pre('findById', function(next) {
+//   this.populate('user');
+//   next();
+// });
 
 postSchema.methods.serialize = function() {
   return {
@@ -40,6 +40,6 @@ postSchema.methods.serialize = function() {
   };
 };
 
-const Posts = mongoose.model('posts', postSchema);
+const Posts = mongoose.model('Posts', postSchema);
 
 module.exports = {Posts};

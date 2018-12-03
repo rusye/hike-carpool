@@ -108,13 +108,19 @@ router.post('/', jsonParser, (req, res) => {
         password: hash,
         firstName,
         lastName,
-        email
+        email,
+        "posts": ''
+        // Im supposed to create some kind of field for this but can't and the above gets this error:
+        // { ValidationError: User validation failed: posts: Cast to ObjectID failed for value "" at path "posts"
+        // { CastError: Cast to ObjectID failed for value "" at path "posts"
+        // How can I add a new field to this schema?
       });
     })
     .then(user => {
       return res.status(201).json(user.serialize());
     })
     .catch(err => {
+      console.log(err);
       if (err.reason === 'ValidationError') {
         return res.status(err.code).json(err);
       }
@@ -124,8 +130,11 @@ router.post('/', jsonParser, (req, res) => {
 
 router.get('/', (req, res) => {
   return User.find()
-    .then(users => res.json(users.map(user => user.serialize())))
-    .catch(err => res.status(500).json({message: 'Internal server error'}));
+  .populate('posts')
+    .then(users => {
+      // console.log('user' + users);
+      res.json(users)})
+    .catch(err => res.status(500).json({message: 'Internal server error' + err}));
 });
 
 module.exports = {router};
