@@ -13,7 +13,7 @@ const UserSchema = mongoose.Schema({
   firstName: {type: String, default: ''},
   lastName: {type: String, default: ''},
   email: String,
-  posts: {type: mongoose.Schema.Types.ObjectId, ref: 'Posts'}
+  posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Posts'}]
 });
 
 // UserSchema.pre('find', function(next) {

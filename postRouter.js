@@ -118,7 +118,8 @@ router.post('/', (req, res) => {
   function nextStep() {
     User.findByIdAndUpdate(
     req.body.user_id, 
-    {$push: {posts: `ObjectID(${postId})`}},
+    // {$push: {posts: `ObjectID(${postId})`}},
+    {$push: {posts: `hi`}},
     {safe: true, upsert: true, new : true},
     function(err, model) {
       console.log(err);
