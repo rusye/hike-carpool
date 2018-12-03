@@ -136,7 +136,6 @@ describe('Hike Posts API resource', function() {
     it('Should add a new post', function() {
       return User.findOne()
         .then(userData => {
-          console.log(userData);
           let newPost = {
             user_id: userData._id,
             user: userData.username,

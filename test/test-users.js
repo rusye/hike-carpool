@@ -27,6 +27,7 @@ describe('/api/user', function() {
   const firstName = faker.name.firstName();
   const lastName = faker.name.lastName();
   const email = faker.internet.email();
+  const posts = []
 
   const usernameB = faker.internet.userName();
   const passwordB = faker.internet.password();
@@ -252,7 +253,8 @@ describe('/api/user', function() {
             password,
             firstName,
             lastName,
-            email
+            email,
+            posts
           })
           .then(res => {
             expect(res).to.have.status(201);
@@ -262,7 +264,8 @@ describe('/api/user', function() {
               'username',
               'firstName',
               'lastName',
-              'email'
+              'email',
+              'posts'
             );
             expect(res.body.username).to.equal(username);
             expect(res.body.firstName).to.equal(firstName);
@@ -298,7 +301,8 @@ describe('/api/user', function() {
               'id',
               'username',
               'firstName',
-              'lastName'
+              'lastName',
+              'posts'
             )
             expect(res.body.username).to.equal(username);
             expect(res.body.firstName).to.equal(firstName);
@@ -346,14 +350,16 @@ describe('/api/user', function() {
             username,
             firstName,
             lastName,
-            email
+            email,
+            posts
           });
           expect(res.body[1]).to.deep.equal({
             id: userB,
             username: usernameB,
             firstName: firstNameB,
             lastName: lastNameB,
-            email: emailB
+            email: emailB,
+            posts: posts
           });
         });
       });

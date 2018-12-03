@@ -21,6 +21,7 @@ describe('Auth endpoints', function() {
   const password = 'examplePass';
   const firstName = 'Example';
   const lastName = 'User';
+  const posts = [];
 
   before(function() {
     return runServer(databaseUrl);
@@ -36,7 +37,8 @@ describe('Auth endpoints', function() {
         username,
         password,
         firstName,
-        lastName
+        lastName,
+        posts
       })
     );
   });
@@ -90,7 +92,8 @@ describe('Auth endpoints', function() {
             id: payload.user.id,
             username,
             firstName,
-            lastName
+            lastName,
+            posts
           });
         });
     });
