@@ -11,7 +11,7 @@ const router = express.Router();
 const jsonParser = bodyParser.json();
 
 // Post to register a new user
-router.post('/', jsonParser, (req, res) => {
+router.post('/', (req, res) => {
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
@@ -109,12 +109,6 @@ router.post('/', jsonParser, (req, res) => {
         firstName,
         lastName,
         email
-        // "posts": ''
-        // I can't create posts key
-        // Im supposed to create some kind of field for this but can't and the above gets this error:
-        // { ValidationError: User validation failed: posts: Cast to ObjectID failed for value "" at path "posts"
-        // { CastError: Cast to ObjectID failed for value "" at path "posts"
-        // How can I add a new field to this schema?
       });
     })
     .then(user => {
@@ -132,10 +126,29 @@ router.post('/', jsonParser, (req, res) => {
 router.get('/', (req, res) => {
   return User.find()
   .populate('posts')
-    .then(users => {
-      // console.log('user' + users);
-      res.json(users.map(user => user.serialize()))})
-    .catch(err => res.status(500).json({message: 'Internal server error' + err}));
+  .then(users => {
+    res.json(users.map(user => user.serialize()))})
+  .catch(err => res.status(500).json({message: 'Internal server error' + err}));
+});
+
+// GET request for post by id
+router.get('/:id', (req, res) => {
+  User.findById(req.params.id)
+  .populate('posts')
+  .then(user => {
+    res.json({
+    id: user._id,
+    username: user.username || '',
+    firstName: user.firstName || '',
+    lastName: user.lastName || '',
+    email: user.email,
+    posts: user.posts
+    })
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({message: 'Internal server error' + err});
+  })
 });
 
 module.exports = {router};
