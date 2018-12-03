@@ -63,8 +63,6 @@ router.post('/', (req, res) => {
     }
   });
 
-  let postId = '';
-
   User
     .findById(req.body.user_id)
     .then(user => {
@@ -78,12 +76,8 @@ router.post('/', (req, res) => {
             date: req.body.date
           })
           .then(post => {
-            // console.log(post._id);
-            postId = `${post._id}`;
-            console.log(postId);
-            nextStep();
-            // user.posts.push(post);
-            // user.save();
+            user.posts.push(post._id);
+            user.save();
             res.status(201).json({
               id: post.id,
               user: user.username,
@@ -93,11 +87,6 @@ router.post('/', (req, res) => {
               date: post.date
             })
           })
-          // .then(post => {
-          //   console.log(JSON.stringify(post));
-            // user.posts.push(post);
-            // user.save();
-          // })
           .catch(err => {
             console.error(err);
             res.status(500).json({message: 'Something went wrong'});
@@ -114,16 +103,6 @@ router.post('/', (req, res) => {
       console.error(err);
       res.status(500).json({message: 'Something went wrong'});
     });
-
-  function nextStep() {
-    User.findByIdAndUpdate(
-    req.body.user_id, 
-    {$push: {posts: ObjectID(postId)}},
-    {safe: true, upsert: true, new : true},
-    function(err, model) {
-      console.log(err);
-      })
-  };
 });
 
 // PUT request for posts
