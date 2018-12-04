@@ -69,15 +69,23 @@ function registerTemplate() {
   `
 };
 
-function displayAllPostsTemplate(posts) {
+function displayAllPostsTemplate(posts, username) {
+  let user = '';
+
   posts.forEach(post => {
+    if (username === undefined) {
+      user = post.user
+    } else {
+      user = username
+    };
+    
     $('.posts').prepend(`
       <section id='individualPosts'>
           <h2>${post.hikename}</h2>
           <p>${post.date}</p>
 
           <section id='userAndSeats'>
-            <h3>${post.user}</h3>
+            <h3>${user}</h3>
             <h3>${post.openseats}</h3>
           </section>
 

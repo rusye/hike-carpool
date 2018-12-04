@@ -4,6 +4,8 @@ const modal = document.getElementsByClassName('forms')[0];
 
 const home = document.getElementsByClassName('loadedHome')[0];
 
+const newHikeDisplay = document.getElementsByClassName('makeNewPost')[0];
+
 
 // ++++++++++++++++++++++++++++++++++++
 // ++++++Nav bar before logging in+++++
@@ -90,6 +92,7 @@ function populateStorage(data) {
   localStorage.setItem('username', data.user.username);
   localStorage.setItem('userID', data.user.id);
   localStorage.setItem('token', data.authToken);
+  console.log(localStorage.getItem('token'));
 };
 
 // Will handle logging in
@@ -112,7 +115,6 @@ function logInSubmit() {
         $('.loggedIn, .notLoggedIn, #introPage').toggle();
         $('.nav-bar').append(`<span id='userInNav'>Welcome, ${localStorage.getItem('username')}!</span>`);
         getAllPosts();
-        loadListenersUponLogin(data.user.username, data.user.id);
       },
       error: function(data) {
         let message = 'There was a problem logging in. ' + data.responseText;
@@ -165,8 +167,10 @@ function registerUser(newUserData) {
 function logOutButton() {
   $('.logout').on('click', function(e) {
     e.preventDefault();
-    $('.loggedIn, .notLoggedIn, #introPage').toggle();
+    $('.posts').empty();
     $('#userInNav, #allPosts').remove();
+    console.log('I have logged out');
+    $('.loggedIn, .notLoggedIn, #introPage').toggle();
     home.style.display = 'none';
     localStorage.clear();
   });
@@ -176,27 +180,27 @@ function logOutButton() {
 function homeButton() {
   $('.homeButton').on('click', function(e) {
     e.preventDefault();
+    $('.posts').empty();
     getAllPosts();
+    newHikeDisplay.style.display = 'block';
   })
 };
 
 // This will load all of your posts
-function myHikesButton(userName) {
+function myHikesButton() {
   $('.myHikesButton').on('click', function(e) {
     e.preventDefault();
-    home.style.display = 'none';
+    newHikeDisplay.style.display = 'none';
+    $('.posts').empty();
     $.ajax({
-      url: `/posts`,
+      url: '/api/users/' + localStorage.getItem('userID'),
       method: 'GET',
-      params: {user: userName},
-      data: {user: userName},
       dataType: 'json',
       contentType: 'application/json',
-      success: function(posts) {
-        console.log('find hike', posts);
-        $('.posts').empty();
-        displayAllPostsTemplate(posts);
-        home.style.display = 'block';
+      headers: {"Authorization": 'Bearer' + localStorage.getItem('token')},
+      success: function(myposts) {
+        console.log('find hike', myposts.posts, myposts.username);
+        displayAllPostsTemplate(myposts.posts, myposts.username);
       }
     });
   })
@@ -214,11 +218,11 @@ function newHikeButton(userID) {
 };
 
 // This will submit the new post
-function newHikeSubmit(userID) {
+function newHikeSubmit() {
   $('form').on('submit', function(e) {
     e.preventDefault();
     let formData = {
-      user_id: userID,
+      user_id: localStorage.getItem('userID'),
       hikename: $('input[name="hikename"]').val(),
       openseats: $('input[name="openseats"]').val(),
       content: $('input[name="content"]').val()
@@ -249,18 +253,14 @@ function postNewHike(newPostData) {
   });
 };
 
-// Load additional listeners upon login
-function loadListenersUponLogin(userName, userID) {
-  logOutButton();
-  myHikesButton(userName);
-  homeButton();
-  newHikeButton(userID);
-};
-
 // Initial listeners that are needed when the page fist loads
 function loadInitialListeners() {
   logInButton();
   registerButton();
+  logOutButton();
+  myHikesButton();
+  homeButton();
+  newHikeButton();
 };
 
 $(loadInitialListeners);
