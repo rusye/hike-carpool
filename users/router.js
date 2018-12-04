@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const passport = require('passport');
 
 const {User} = require('./models');
@@ -9,21 +9,11 @@ const {Posts} = require('../models');
 
 const router = express.Router();
 
-const jsonParser = bodyParser.json();
+// const jsonParser = bodyParser.json();
 
-const {router: authRouter, localStrategy, jwtStrategy} = require('../auth');
+const {router: localStrategy, jwtStrategy} = require('../auth');
 passport.use(localStrategy);
 passport.use(jwtStrategy);
-
-router.use(function(req, res, next) {
-	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
-	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
-	if (req.method === 'OPTIONS') {
-		return res.send(204);
-	}
-	next();
-});
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
@@ -140,6 +130,10 @@ router.post('/', (req, res) => {
     });
 });
 
+
+// +++++++++++++++++++++++++++++++++++
+// ++++++Delete The Get To '/'++++++++
+// +++++++++++++++++++++++++++++++++++
 router.get('/', (req, res) => {
   return User.find()
   .populate('posts')
