@@ -95,6 +95,13 @@ function displayAllPostsTemplate(posts, username) {
         </section>
       </section>
     `);
+    
+    if (user === localStorage.getItem('username')) {
+      console.log('I work');
+      $('#individualPosts').append(`
+        <button class='deletePost'>Delete</button>
+      `)
+    };
   });
 };
 
