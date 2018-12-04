@@ -197,7 +197,7 @@ function myHikesButton() {
       method: 'GET',
       dataType: 'json',
       contentType: 'application/json',
-      headers: {"Authorization": 'Bearer' + localStorage.getItem('token')},
+      headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
       success: function(myposts) {
         console.log('find hike', myposts.posts, myposts.username);
         displayAllPostsTemplate(myposts.posts, myposts.username);
@@ -207,13 +207,13 @@ function myHikesButton() {
 };
 
 // This will load the form for new hikes
-function newHikeButton(userID) {
+function newHikeButton() {
   $('.makeNewPost').on('click', function(e) {
     e.preventDefault();
     $('.forms').append(newHikePost);
     closeAForm();
     modal.style.display = 'block';
-    newHikeSubmit(userID);
+    newHikeSubmit();
   })
 };
 
@@ -240,6 +240,7 @@ function postNewHike(newPostData) {
     data: JSON.stringify(newPostData),
     dataType: 'json',
     contentType: 'application/json',
+    headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
     success: function(data) {
       removeForm();
       let message = 'success! remove me later';

@@ -10,6 +10,12 @@ const passport = require('passport');
 const {Posts} = require('./models');
 const {User} = require('./users/models');
 
+const {router: localStrategy, jwtStrategy} = require('./auth');
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+const jwtAuth = passport.authenticate('jwt', {session: false});
+
 // GET request for posts
 router.get('/', (req, res) => {
   Posts.find()
@@ -53,7 +59,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST for posts
-router.post('/', (req, res) => {
+router.post('/', jwtAuth, (req, res) => {
   const requiredFields = ['hikename', 'openseats', 'content', 'user_id'];
   requiredFields.forEach(field => {
     if (!(field in req.body)) {
