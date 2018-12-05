@@ -13,16 +13,16 @@ const newHikeDisplay = document.getElementsByClassName('makeNewPost')[0];
 
 
 // Will load the main screen with all posts visible
-function getAllPosts() {
+function getAllPostsCall() {
   $.ajax({
     url: '/posts',
     method: 'GET',
     dataType: 'json',
     contentType: 'application/json',
     success: function(posts) {
-      console.log(posts);
       displayAllPostsTemplate(posts);
       home.style.display = 'block';
+      deletePost();
     }
   })
 };
@@ -92,7 +92,6 @@ function populateStorage(data) {
   localStorage.setItem('username', data.user.username);
   localStorage.setItem('userID', data.user.id);
   localStorage.setItem('token', data.authToken);
-  console.log(localStorage.getItem('token'));
 };
 
 // Will handle logging in
@@ -114,7 +113,7 @@ function logInSubmit() {
         removeForm();
         $('.loggedIn, .notLoggedIn, #introPage').toggle();
         $('.nav-bar').append(`<span id='userInNav'>Welcome, ${localStorage.getItem('username')}!</span>`);
-        getAllPosts();
+        getAllPostsCall();
       },
       error: function(data) {
         let message = 'There was a problem logging in. ' + data.responseText;
@@ -181,10 +180,27 @@ function homeButton() {
   $('.homeButton').on('click', function(e) {
     e.preventDefault();
     $('.posts').empty();
-    getAllPosts();
+    getAllPostsCall();
     newHikeDisplay.style.display = 'block';
   })
 };
+
+// Sends data to user endpoint
+function myHikesCall() {
+  $.ajax({
+    url: '/api/users/' + localStorage.getItem('userID'),
+    method: 'GET',
+    dataType: 'json',
+    contentType: 'application/json',
+    headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
+    success: function(myposts) {
+      console.log('find hike', myposts.posts, myposts.username);
+      displayAllPostsTemplate(myposts.posts, myposts.username);
+      deletePost();
+    }
+  });
+};
+
 
 // This will load all of your posts
 function myHikesButton() {
@@ -192,17 +208,19 @@ function myHikesButton() {
     e.preventDefault();
     newHikeDisplay.style.display = 'none';
     $('.posts').empty();
-    $.ajax({
-      url: '/api/users/' + localStorage.getItem('userID'),
-      method: 'GET',
-      dataType: 'json',
-      contentType: 'application/json',
-      headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
-      success: function(myposts) {
-        console.log('find hike', myposts.posts, myposts.username);
-        displayAllPostsTemplate(myposts.posts, myposts.username);
-      }
-    });
+    myHikesCall();
+    // $.ajax({
+    //   url: '/api/users/' + localStorage.getItem('userID'),
+    //   method: 'GET',
+    //   dataType: 'json',
+    //   contentType: 'application/json',
+    //   headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
+    //   success: function(myposts) {
+    //     console.log('find hike', myposts.posts, myposts.username);
+    //     displayAllPostsTemplate(myposts.posts, myposts.username);
+    //     deletePost();
+    //   }
+    // });
   })
 };
 
@@ -245,13 +263,47 @@ function postNewHike(newPostData) {
       removeForm();
       let message = 'success! remove me later';
       window.alert(message);
-      getAllPosts();
+      getAllPostsCall();
     },
     error: function(data) {
       let message = 'There was a problem with your form: ' + data.responseText.message;
       window.alert(message);
     }
   });
+};
+
+// This will delete a post
+function deletePost() {
+  $('.deletePost').on('click', function(e) {
+    e.preventDefault();
+    console.log('I delete');
+    console.log($(this).data('postid'));
+    // $('.posts').empty();
+    // console.log(newHikeDisplay.style.display);
+    // if(!(newHikeDisplay.style.display === 'none')) {
+    //   console.log(`I'm on the home screen`)
+    // } else {
+    //   console.log(`I'm in my hikes`)
+    // };
+    $.ajax({
+      url: '/posts/' + $(this).data('postid'),
+      method: 'DELETE',
+      dataType: 'json',
+      contentType: 'application/json',
+      headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
+      success: function() {
+        if(!(newHikeDisplay.style.display === 'none')) {
+          console.log(`I'm on the home screen`);
+          $('.posts').empty();
+          getAllPostsCall();
+        } else {
+          console.log(`I'm in my hikes`);
+          $('.posts').empty();
+          myHikesCall();
+        }
+      }
+    });
+  })
 };
 
 // Initial listeners that are needed when the page fist loads

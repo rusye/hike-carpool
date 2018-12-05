@@ -71,12 +71,15 @@ function registerTemplate() {
 
 function displayAllPostsTemplate(posts, username) {
   let user = '';
+  let postID = '';
 
   posts.forEach(post => {
     if (username === undefined) {
-      user = post.user
+      user = post.user;
+      postID = post.id;
     } else {
-      user = username
+      user = username;
+      postID = post._id;
     };
     
     $('.posts').prepend(`
@@ -99,7 +102,7 @@ function displayAllPostsTemplate(posts, username) {
     if (user === localStorage.getItem('username')) {
       console.log('I work');
       $('#individualPosts').append(`
-        <button class='deletePost'>Delete</button>
+        <button data-postId=${postID} class='deletePost'>Delete</button>
       `)
     };
   });

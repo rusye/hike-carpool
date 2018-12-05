@@ -131,7 +131,7 @@ router.put('/:id', (req, res) => {
     .catch(err => res.status(500).json({message: 'Something went wrong'}));
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', jwtAuth, (req, res) => {
   Posts
     .findByIdAndRemove(req.params.id)
     .then(post => res.status(204).end())
