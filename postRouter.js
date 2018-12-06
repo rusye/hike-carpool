@@ -112,7 +112,7 @@ router.post('/', jwtAuth, (req, res) => {
 });
 
 // PUT request for posts
-router.put('/:id', (req, res) => {
+router.put('/:id', jwtAuth, (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({message: `ID's do not match`});
   }
