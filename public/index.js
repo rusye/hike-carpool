@@ -23,6 +23,7 @@ function getAllPostsCall() {
       displayAllPostsTemplate(posts);
       home.style.display = 'block';
       deletePost();
+      editPostButton();
     }
   })
 };
@@ -168,7 +169,6 @@ function logOutButton() {
     e.preventDefault();
     $('.posts').empty();
     $('#userInNav, #allPosts').remove();
-    console.log('I have logged out');
     $('.loggedIn, .notLoggedIn, #introPage').toggle();
     home.style.display = 'none';
     localStorage.clear();
@@ -194,9 +194,9 @@ function myHikesCall() {
     contentType: 'application/json',
     headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
     success: function(myposts) {
-      console.log('find hike', myposts.posts, myposts.username);
       displayAllPostsTemplate(myposts.posts, myposts.username);
       deletePost();
+      editPostButton();
     }
   });
 };
@@ -209,18 +209,6 @@ function myHikesButton() {
     newHikeDisplay.style.display = 'none';
     $('.posts').empty();
     myHikesCall();
-    // $.ajax({
-    //   url: '/api/users/' + localStorage.getItem('userID'),
-    //   method: 'GET',
-    //   dataType: 'json',
-    //   contentType: 'application/json',
-    //   headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
-    //   success: function(myposts) {
-    //     console.log('find hike', myposts.posts, myposts.username);
-    //     displayAllPostsTemplate(myposts.posts, myposts.username);
-    //     deletePost();
-    //   }
-    // });
   })
 };
 
@@ -249,9 +237,8 @@ function newHikeSubmit() {
   })
 };
 
-// This will post the new post to the database
+// This will POST the new post to the database
 function postNewHike(newPostData) {
-  console.log(newPostData);
   $.ajax({
     url: '/posts',
     method: 'POST',
@@ -272,19 +259,63 @@ function postNewHike(newPostData) {
   });
 };
 
+// This will edit a post
+function editPostButton() {
+  $('.editPost').on('click', function(e) {
+    e.preventDefault();
+    let postID = $(this).data('postid');
+    $('.forms').append(editHikePost($(this).data()));
+    closeAForm();
+    modal.style.display = 'block';
+    editPostSubmit(postID);
+  });
+};
+
+// This will submit the updated hike data
+function editPostSubmit(postID) {
+  $('form').on('submit', function(e) {
+    e.preventDefault();
+    let formData = {
+      id: postID,
+      hikename: $('input[name="hikename"]').val(),
+      openseats: $('input[name="openseats"]').val(),
+      content: $('input[name="content"]').val()
+    };
+    putHikeData(formData);
+  });
+};
+
+// This will PUT the new data to the database
+function putHikeData(updatePostData) {
+  $.ajax({
+    url: '/posts/' + updatePostData.id,
+    method: 'PUT',
+    dataType: 'json',
+    data: JSON.stringify(updatePostData),
+    contentType: 'application/json',
+    headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
+    success: function() {
+      if(!(newHikeDisplay.style.display === 'none')) {
+        removeForm();
+        $('.posts').empty();
+        getAllPostsCall();
+      } else {
+        removeForm();
+        $('.posts').empty();
+        myHikesCall();
+      }
+    },
+    error: function(data) {
+      let message = 'There was a problem with your form: ' + data.responseText.message;
+      window.alert(message);
+    }
+  });
+};
+
 // This will delete a post
 function deletePost() {
   $('.deletePost').on('click', function(e) {
     e.preventDefault();
-    console.log('I delete');
-    console.log($(this).data('postid'));
-    // $('.posts').empty();
-    // console.log(newHikeDisplay.style.display);
-    // if(!(newHikeDisplay.style.display === 'none')) {
-    //   console.log(`I'm on the home screen`)
-    // } else {
-    //   console.log(`I'm in my hikes`)
-    // };
     $.ajax({
       url: '/posts/' + $(this).data('postid'),
       method: 'DELETE',
@@ -293,11 +324,9 @@ function deletePost() {
       headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
       success: function() {
         if(!(newHikeDisplay.style.display === 'none')) {
-          console.log(`I'm on the home screen`);
           $('.posts').empty();
           getAllPostsCall();
         } else {
-          console.log(`I'm in my hikes`);
           $('.posts').empty();
           myHikesCall();
         }
