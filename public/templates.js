@@ -100,9 +100,9 @@ function displayAllPostsTemplate(posts, username) {
     `);
     
     if (user === localStorage.getItem('username')) {
-      console.log('I work');
       $('#individualPosts').append(`
         <button data-postId=${postID} class='deletePost'>Delete</button>
+        <button data-postId=${postID} data-hikename=${post.hikename} data-openseats=${post.openseats} data-content=${post.content} class='editPost'>Edit</button>
       `)
     };
   });
@@ -132,6 +132,38 @@ function newHikePost() {
 
             <section class='formButtons'>
               <button class='formSubmitButton' type='submit'>Create New Hike</button>
+              <button type='button' class='cancelbtn '>Cancel</button>
+            </section>
+          </section>
+        </fieldset>
+      </form>
+  `
+};
+
+function editHikePost(data) {
+  return `
+      <form id='newHikePost' class='modal-content animate' action=''>
+        <section class="imgcontainer">
+          <span class="close" title="Close Form">&times;</span>
+        </section>
+
+        <fieldset>
+          <legend>Edit Hike</legend>
+          <section class='container'>
+            <label><b>Hike Name</b>
+              <input name='hikename' id='newHikeName' type='text' placeholder='required' value=${data.hikename} required>
+            </label>
+
+            <label><b>Number of Open Seats</b>
+              <input name='openseats' id='newOpenSeats' type='number' max='14' placeholder='required' value=${data.openseats} required>
+            </label>
+
+            <label><b>Description About Hike</b>
+              <input name='content' id='newContent' type='text' placeholder='required' value=${data.content} required>
+            </label>
+
+            <section class='formButtons'>
+              <button class='formSubmitButton' type='submit'>Edit Hike</button>
               <button type='button' class='cancelbtn '>Cancel</button>
             </section>
           </section>
