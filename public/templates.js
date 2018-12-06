@@ -81,6 +81,12 @@ function displayAllPostsTemplate(posts, username) {
       user = username;
       postID = post._id;
     };
+
+    let hikename = JSON.stringify(`${post.hikename}`);
+    let openseats = JSON.stringify(`${post.openseats}`);
+    let content = JSON.stringify(`${post.content}`);
+
+    console.log(post.hikename);
     
     $('.posts').prepend(`
       <section id='individualPosts'>
@@ -100,9 +106,10 @@ function displayAllPostsTemplate(posts, username) {
     `);
     
     if (user === localStorage.getItem('username')) {
+      localStorage.setItem(postID, JSON.stringify(post));
       $('#individualPosts').append(`
         <button data-postId=${postID} class='deletePost'>Delete</button>
-        <button data-postId=${postID} data-hikename=${post.hikename} data-openseats=${post.openseats} data-content=${post.content} class='editPost'>Edit</button>
+        <button data-postId=${postID} data-hikename=${hikename} data-openseats=${openseats} data-content=${content} class='editPost'>Edit</button>
       `)
     };
   });
@@ -140,7 +147,13 @@ function newHikePost() {
   `
 };
 
-function editHikePost(data) {
+function editHikePost(postID) {
+  console.log(postID);
+  let post = JSON.parse(localStorage.getItem(postID));
+  let hikename = post.hikename;
+  console.log(hikename);
+  console.log(post.openseats);
+  console.log(post.content);
   return `
       <form id='newHikePost' class='modal-content animate' action=''>
         <section class="imgcontainer">
@@ -151,15 +164,17 @@ function editHikePost(data) {
           <legend>Edit Hike</legend>
           <section class='container'>
             <label><b>Hike Name</b>
-              <input name='hikename' id='newHikeName' type='text' placeholder='required' value=${data.hikename} required>
+            <textarea rows='1' cols='50' required placeholder='required'>${hikename}</textarea>
+              <input name='hikename' id='newHikeName' type='text' placeholder='required' value='${hikename}' required>
             </label>
+            <h1>${hikename}</h1>
 
             <label><b>Number of Open Seats</b>
-              <input name='openseats' id='newOpenSeats' type='number' max='14' placeholder='required' value=${data.openseats} required>
+              <input name='openseats' id='newOpenSeats' type='number' max='14' placeholder='required' value=${post.openseats} required>
             </label>
 
             <label><b>Description About Hike</b>
-              <input name='content' id='newContent' type='text' placeholder='required' value=${data.content} required>
+              <input name='content' id='newContent' type='text' placeholder='required' value=${post.content} required>
             </label>
 
             <section class='formButtons'>

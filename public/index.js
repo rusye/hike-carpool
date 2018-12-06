@@ -264,7 +264,8 @@ function editPostButton() {
   $('.editPost').on('click', function(e) {
     e.preventDefault();
     let postID = $(this).data('postid');
-    $('.forms').append(editHikePost($(this).data()));
+    console.log(JSON.parse(localStorage.getItem(postID)));
+    $('.forms').append(editHikePost(postID));
     closeAForm();
     modal.style.display = 'block';
     editPostSubmit(postID);
