@@ -150,10 +150,8 @@ function newHikePost() {
 function editHikePost(postID) {
   console.log(postID);
   let post = JSON.parse(localStorage.getItem(postID));
-  let hikename = post.hikename;
-  console.log(hikename);
-  console.log(post.openseats);
-  console.log(post.content);
+  let hikename = post.hikename.replace(/"/g, "&quot;").replace(/'/g, "&#039");
+  let content = post.content.replace(/"/g, "&quot;").replace(/'/g, "&#039");
   return `
       <form id='newHikePost' class='modal-content animate' action=''>
         <section class="imgcontainer">
@@ -164,17 +162,15 @@ function editHikePost(postID) {
           <legend>Edit Hike</legend>
           <section class='container'>
             <label><b>Hike Name</b>
-            <textarea rows='1' cols='50' required placeholder='required'>${hikename}</textarea>
               <input name='hikename' id='newHikeName' type='text' placeholder='required' value='${hikename}' required>
             </label>
-            <h1>${hikename}</h1>
 
             <label><b>Number of Open Seats</b>
               <input name='openseats' id='newOpenSeats' type='number' max='14' placeholder='required' value=${post.openseats} required>
             </label>
 
             <label><b>Description About Hike</b>
-              <input name='content' id='newContent' type='text' placeholder='required' value=${post.content} required>
+              <input name='content' id='newContent' type='text' placeholder='required' value='${content}' required>
             </label>
 
             <section class='formButtons'>
