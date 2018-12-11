@@ -130,18 +130,6 @@ router.post('/', (req, res) => {
     });
 });
 
-
-// +++++++++++++++++++++++++++++++++++
-// ++++++Delete The Get To '/'++++++++
-// +++++++++++++++++++++++++++++++++++
-router.get('/', (req, res) => {
-  return User.find()
-  .populate('posts')
-  .then(users => {
-    res.json(users.map(user => user.serialize()))})
-  .catch(err => res.status(500).json({message: 'Internal server error' + err}));
-});
-
 // GET request for post by id
 router.get('/:id', jwtAuth, (req, res) => {
   User.findById(req.params.id)
