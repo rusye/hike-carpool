@@ -4,9 +4,11 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const faker = require('faker');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const expect = chai.expect;
 
+const {JWT_SECRET} = require('../config');
 const {Posts} = require('../models');
 const {User} = require('../users/models');
 const {app, runServer, closeServer} = require('../server');
@@ -136,6 +138,20 @@ describe('Hike Posts API resource', function() {
     it('Should add a new post', function() {
       return User.findOne()
         .then(userData => {
+          const token = jwt.sign(
+            {
+              user: {
+                user: userData.username
+              }
+            },
+            JWT_SECRET,
+            {
+              algorithm: 'HS256',
+              subject: userData.username,
+              expiresIn: '7d'
+            }
+          );
+
           let newPost = {
             user_id: userData._id,
             user: userData.username,
@@ -144,7 +160,7 @@ describe('Hike Posts API resource', function() {
             content: faker.lorem.sentence()
           };
           
-          return chai.request(app).post('/posts').send(newPost)
+          return chai.request(app).post('/posts').set('authorization', `Bearer ${token}`).send(newPost)
             .then(res => {
               expect(res).to.have.status(201);
               expect(res).to.be.json;
@@ -177,9 +193,22 @@ describe('Hike Posts API resource', function() {
       return Posts.findOne()
         .then(post => {
           updateData.id = post.id;
+          const token = jwt.sign(
+            {
+              user: {
+                _id: post.id
+              }
+            },
+            JWT_SECRET,
+            {
+              algorithm: 'HS256',
+              subject: post.id,
+              expiresIn: '7d'
+            }
+          );
 
           return chai.request(app)
-          .put(`/posts/${updateData.id}`)
+          .put(`/posts/${updateData.id}`).set('authorization', `Bearer ${token}`)
           .send(updateData)
         })
         .then(res => {
@@ -199,8 +228,21 @@ describe('Hike Posts API resource', function() {
       let post;
       return Posts.findOne()
         .then(_post => {
+          const token = jwt.sign(
+            {
+              user: {
+                _id: _post.id
+              }
+            },
+            JWT_SECRET,
+            {
+              algorithm: 'HS256',
+              subject: _post.id,
+              expiresIn: '7d'
+            }
+          );
           post = _post;
-          return chai.request(app).delete(`/posts/${post.id}`);
+          return chai.request(app).delete(`/posts/${post.id}`).set('authorization', `Bearer ${token}`);
         })
         .then(res => {
           expect(res).to.have.status(204);
