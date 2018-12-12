@@ -248,8 +248,6 @@ function postNewHike(newPostData) {
     headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
     success: function(data) {
       removeForm();
-      let message = 'success! remove me later';
-      window.alert(message);
       getAllPostsCall();
     },
     error: function(data) {
