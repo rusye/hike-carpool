@@ -1,4 +1,14 @@
-body {font-family: Arial, Helvetica, sans-serif;}
+body {
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-family:Courier New;
+    max-width: 920px;
+    margin: auto;
+    height: calc(100vh - 55px);
+    background-image: url('https://farm5.static.flickr.com/4550/39045423782_3f652d5c5b_b.jpg');
+    background-size: cover;
+    /* background-color: orange; */
+    /* height: calc(100vh - 55px); */
+}
 
 /* Full-width input fields */
 input[type=text], input[type=password], input[type=number], input[type=email] {
@@ -10,6 +20,108 @@ input[type=text], input[type=password], input[type=number], input[type=email] {
     box-sizing: border-box;
 }
 
+h1 {
+    /* padding-top: 10px; */
+    margin-top: 0;
+}
+
+main {
+    height: calc(100vh - 55px);
+    /* height: 100%; */
+    padding: 10px;
+    align-content: center;
+    text-align: center;
+    /* margin: auto; */
+    /* margin-top: 0; */
+    /* background-color: orange; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* resize: vertical; */
+    /* overflow: auto; */
+    /* align-items: center; */
+}
+
+#introPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    resize: vertical;
+    overflow: auto;
+    align-items: center;
+    height: calc(100vh - 55px);
+}
+
+nav {
+    margin: 0 10px 0 10px;
+    background-color: rgba(14, 75, 19, 0.6);
+    min-height: 35px;
+}
+
+.navButtons {
+    float: right;
+    font-size: 0;
+}
+
+.navButtons button {
+	color: white;
+	font-weight: bold;
+	background-color: rgba(24, 126, 32, 1);
+}
+
+.navButtons button:hover {
+	background-color: #2be43a;
+	color: black;
+}
+
+.navButtons button:active {
+	position:relative;
+	top:2px;
+}
+
+#userInNav {
+	color: white;
+	font-weight: bold;
+    display: inline-block;
+    padding-left: 10px;
+    line-height: 2.15em;
+}
+
+nav button {
+    padding: 0;
+    width: 85px;
+    height: 35px;
+    border: none;
+    font-size: 17px;
+}
+
+.makeNewPost {
+    align-self:center;
+    background:transparent;
+    padding:1rem 1rem;
+    margin:0 1rem;
+    transition:all .5s ease;
+    color:white;
+    font-family: 'Patrick Hand SC', cursive;
+    text-shadow: 0 0 0.5em rgb(0, 0, 0), 0 0 0.5em rgb(0, 0, 0), 0 0 0.5em rgb(0, 0, 0), 0 0 0.5em rgb(0, 0, 0);
+    font-size:2rem;
+    letter-spacing:1px;
+    outline:none;
+    border:solid 7px #187e20;
+    box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+
+.makeNewPost:hover {
+    border: solid 7px #2be43a;
+    box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
+}
+
+.makeNewPost:active {
+    position:relative;
+    top:2px;
+}
+
 /* This removes the white space between the buttons */
 .formButtons {
 	font-size: 0;
@@ -18,13 +130,15 @@ input[type=text], input[type=password], input[type=number], input[type=email] {
 /* Set a style for all buttons */
 .formSubmitButton {
 	font-size: 17px;
-	background-color: #4CAF50;
+	background-color: #0c3e10;
+	font-family:Courier New;
+	font-size:17px;
+	font-weight:bold;
 	color: white;
 	padding: 14px 20px;
 	margin: 8px 0;
 	border: none;
 	cursor: pointer;
-	/* width: 100%; */
 	width: 50%;
 }
 
@@ -34,14 +148,16 @@ input[type=text], input[type=password], input[type=number], input[type=email] {
 
 /* Extra styles for the cancel button */
 .cancelbtn {
-		/* width: auto; */
-		font-size: 17px;
-		padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-		width: 50%;
-    background-color: #f44336;
+    font-size: 17px;
+	background-color: #f44336;
+	font-family:Courier New;
+	font-size:17px;
+	font-weight:bold;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 50%;
 }
 
 .cancelbtn:hover {
@@ -126,10 +242,87 @@ fieldset {
 /* Home page display */
 .loadedHome {
     display: none;
+    /* margin-top: 55px; */
+}
+
+.posts {
+	margin-top: 10px;
 }
 
 #individualPosts {
-    border: solid 2px blue;
+    color: white;
+    background-color: rgba(24, 126, 32, 0.6);
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+header {
+    color: white;
+    background-color: rgba(24, 126, 32, 0.6);
+    width: 100%;
+}
+
+.loadedHome {
+    width: 100%;
+    /* position: relative; */
+}
+
+.cssPostDate {
+    top: -10px;
+    right: 10px;
+    position: absolute;
+}
+
+.postsEditDelete {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.cssPostedBy {
+	position: absolute;
+	top: -14px;
+	left: 10px;
+}
+
+.cssHikename {
+    background-color: rgba(242, 157, 0, 0.6);
+    margin-bottom: 0;
+}
+    
+.cssSeatsOpen {
+    background-color: rgba(255, 215, 0, 0.5);
+    color: black;
+    margin-top: 0;
+    padding: 10px 0 10px 0;
+}
+
+.postsEditDelete button {
+	background-color:#0c3e10;
+	-moz-border-radius:9px;
+	-webkit-border-radius:9px;
+	border-radius:9px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Courier New;
+	font-size:17px;
+	padding:5px 11px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #2f6627;
+    border: none;
+    font-weight:bold;
+}
+
+.postsEditDelete button:hover {
+	background-color:#5cbf2a;
+	}
+
+.postsEditDelete button:active{
+	position:relative;
+	top:2px;
 }
 
 legend {
@@ -152,5 +345,43 @@ legend {
 @media screen and (max-width: 300px) {
     .cancelbtn, .formSubmitButton {
        width: 100%;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .navButtons {
+        width: 100%;
+    }
+
+    #userInNav {
+        display: block;
+        padding-left: 0;
+        text-align: center;
+    }
+    
+    .loggedIn {
+        width: 33.33333%;
+    }
+
+    .notLoggedIn {
+        width: 50%;
+    }
+    
+    /* .navButtons {
+        width: 100%;
+    } */
+
+    /* nav button {
+        max-width: 50%;
+    } */
+}
+
+@media screen and (max-width: 270px) {
+    .notLoggedIn, .loggedIn {
+        width: 100%;
+    }
+
+    .navButtons {
+        display: contents;
     }
 }
