@@ -36,7 +36,7 @@ function registerTemplate() {
         <span class="close" title="Close Form">&times;</span>
       </section>
 
-      <fieldset>
+      <fieldset id='registerFieldset'>
         <legend>Register</legend>
         <section class='container'>
           <label><b>Username</b>
@@ -108,7 +108,7 @@ function displayAllPostsTemplate(posts, username) {
     
     if (user === localStorage.getItem('username')) {
       localStorage.setItem(postID, JSON.stringify(post));
-      $('#individualPosts').append(`
+      $('#postContent').append(`
         <section class='postsEditDelete'>
           <button data-postId=${postID} class='deletePost'>Delete</button>
           <button data-postId=${postID} data-hikename=${hikename} data-openseats=${openseats} data-content=${content} class='editPost'>Edit</button>
@@ -137,13 +137,15 @@ function newHikePost() {
             </label>
 
             <label><b>Description About Hike</b>
-              <input name='content' id='newContent' type='text' placeholder='required' required>
+              <input name='content' id='newContent' type='text' placeholder='required, see note' required>
             </label>
 
             <section class='formButtons'>
               <button class='formSubmitButton' type='submit'>Create New Hike</button>
               <button type='button' class='cancelbtn '>Cancel</button>
             </section>
+
+            <span>Note: <br>Please include details about departure time, location departing from, and contact info.</span>
           </section>
         </fieldset>
       </form>
@@ -180,6 +182,8 @@ function editHikePost(postID) {
               <button class='formSubmitButton' type='submit'>Edit Hike</button>
               <button type='button' class='cancelbtn '>Cancel</button>
             </section>
+
+            <span>Note: <br>Don't forget to include details about departure time, location departing from, and contact info.</span>
           </section>
         </fieldset>
       </form>
