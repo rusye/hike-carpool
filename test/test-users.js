@@ -310,59 +310,5 @@ describe('/api/user', function() {
           });
       });
     });
-
-    describe('GET', function() {
-      it('Should return an empty array initially', function() {
-        return chai.request(app).get('/api/users').then(res => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.an('array');
-          expect(res.body).to.have.length(0);
-        });
-      });
-
-      it('Should return an array of users', function() {
-        return User.create(
-          {
-            username,
-            password,
-            firstName,
-            lastName,
-            email
-          },
-          {
-            username: usernameB,
-            password: passwordB,
-            firstName: firstNameB,
-            lastName: lastNameB,
-            email: emailB
-          }
-        )
-        .then(() => chai.request(app).get('/api/users'))
-        .then(res => {
-          console.log(JSON.stringify(res.body));
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.an('array');
-          expect(res.body).to.have.length(2);
-          const userA = res.body[0].id;
-          const userB = res.body[1].id;
-          expect(res.body[0]).to.deep.equal({
-            id: userA,
-            username,
-            firstName,
-            lastName,
-            email,
-            posts
-          });
-          expect(res.body[1]).to.deep.equal({
-            id: userB,
-            username: usernameB,
-            firstName: firstNameB,
-            lastName: lastNameB,
-            email: emailB,
-            posts: posts
-          });
-        });
-      });
-    });
   });
 });
