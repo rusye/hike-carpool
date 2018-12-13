@@ -13,11 +13,13 @@
 
   <body>
     <nav role='navigation' class='nav-bar'>
-      <button class='loggedIn homeButton' hidden>Home</button>
-      <button class='loggedIn myHikesButton' hidden>My Hikes</button>
-      <button class='loggedIn logout' hidden>Logout</button>
-      <button class='notLoggedIn login'>Login</button>
-      <button class='notLoggedIn register'>Register</button>
+      <div class='navButtons'>
+        <button class='loggedIn homeButton' hidden>Home</button>
+        <button class='loggedIn myHikesButton' hidden>My Hikes</button>
+        <button class='loggedIn logout' hidden>Logout</button>
+        <button class='notLoggedIn login'>Login</button>
+        <button class='notLoggedIn register'>Register</button>
+      </div>
     </nav>
 
     <main role='main'>
@@ -26,12 +28,8 @@
           <h1>Hike Carpool</h1>
           <p>Hike Carpool is a blog dedicated to helping hikers find other hikers that have room in their 
             car's when they are going hiking or even share when they have room in their own cars.</p>
-
-          <h2>Make sure certain Endpoints are protected.</h2>
-          <h3>Make formData a localstorage item</h3>
+            
           <h3>Need to set a html response when there are no posts for user under my hike</h3>
-          <p>Make alert asking to confirm that I want to delete post</p>
-          <p>create a new template to edit posts</p>
         </header>
       </section>
 
@@ -39,7 +37,7 @@
       </section>
 
       <section class='loadedHome' aria-live='assertive'>
-        <button class='makeNewPost'>New Hike</button>
+        <button class='makeNewPost'>Share A New Hike</button>
         <section class='posts'></section>
       </section>
 
