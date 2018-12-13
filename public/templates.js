@@ -90,15 +90,16 @@ function displayAllPostsTemplate(posts, username) {
     
     $('.posts').prepend(`
       <section id='individualPosts'>
-          <h2>${post.hikename}</h2>
-          <p>${post.date}</p>
+          <h2 class='cssHikename'>Hike: ${post.hikename}</h2>
+          <p class='cssPostDate'>${post.date}</p>
 
           <section id='userAndSeats'>
-            <h3>${user}</h3>
-            <h3>${post.openseats}</h3>
+            <h3 class='cssPostedBy'>Hiker: ${user}</h3>
+            <h3 class='cssSeatsOpen'>Seats Open: ${post.openseats}</h3>
           </section>
 
           <section id='postContent'>
+            <h2>Hike Comments</h2>
             <p>${post.content}</p>
           </section>
         </section>
@@ -108,8 +109,10 @@ function displayAllPostsTemplate(posts, username) {
     if (user === localStorage.getItem('username')) {
       localStorage.setItem(postID, JSON.stringify(post));
       $('#individualPosts').append(`
-        <button data-postId=${postID} class='deletePost'>Delete</button>
-        <button data-postId=${postID} data-hikename=${hikename} data-openseats=${openseats} data-content=${content} class='editPost'>Edit</button>
+        <section class='postsEditDelete'>
+          <button data-postId=${postID} class='deletePost'>Delete</button>
+          <button data-postId=${postID} data-hikename=${hikename} data-openseats=${openseats} data-content=${content} class='editPost'>Edit</button>
+        </section>
       `)
     };
   });
