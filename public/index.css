@@ -1,66 +1,66 @@
 body {
-    /* font-family: Arial, Helvetica, sans-serif; */
-    font-family:Courier New;
-    max-width: 920px;
-    margin: auto;
-    height: calc(100vh - 55px);
-    background-image: url('https://farm5.static.flickr.com/4550/39045423782_3f652d5c5b_b.jpg');
-    background-size: cover;
-    /* background-color: orange; */
-    /* height: calc(100vh - 55px); */
+	/* font-family: Arial, Helvetica, sans-serif; */
+	font-family:Courier New;
+	max-width: 920px;
+	margin: auto;
+	height: calc(100vh - 55px);
+	background-image: url('https://farm5.static.flickr.com/4550/39045423782_3f652d5c5b_b.jpg');
+	background-size: cover;
+	/* background-color: orange; */
+	/* height: calc(100vh - 55px); */
 }
 
 /* Full-width input fields */
 input[type=text], input[type=password], input[type=number], input[type=email] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
 }
 
 h1 {
-    /* padding-top: 10px; */
-    margin-top: 0;
+	/* padding-top: 10px; */
+	margin-top: 0;
 }
 
 main {
-    height: calc(100vh - 55px);
-    /* height: 100%; */
-    padding: 10px;
-    align-content: center;
-    text-align: center;
-    /* margin: auto; */
-    /* margin-top: 0; */
-    /* background-color: orange; */
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* justify-content: center; */
-    /* resize: vertical; */
-    /* overflow: auto; */
-    /* align-items: center; */
+	height: calc(100vh - 55px);
+	/* height: 100%; */
+	padding: 10px;
+	align-content: center;
+	text-align: center;
+	/* margin: auto; */
+	/* margin-top: 0; */
+	/* background-color: orange; */
+	/* display: flex; */
+	/* flex-direction: column; */
+	/* justify-content: center; */
+	/* resize: vertical; */
+	/* overflow: auto; */
+	/* align-items: center; */
 }
 
 #introPage {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    resize: vertical;
-    overflow: auto;
-    align-items: center;
-    height: calc(100vh - 55px);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	resize: vertical;
+	overflow: auto;
+	align-items: center;
+	height: calc(100vh - 55px);
 }
 
 nav {
-    margin: 0 10px 0 10px;
-    background-color: rgba(14, 75, 19, 0.6);
-    min-height: 35px;
+	margin: 0 10px 0 10px;
+	background-color: rgba(14, 75, 19, 0.6);
+	min-height: 35px;
 }
 
 .navButtons {
-    float: right;
-    font-size: 0;
+	float: right;
+	font-size: 0;
 }
 
 .navButtons button {
@@ -82,44 +82,50 @@ nav {
 #userInNav {
 	color: white;
 	font-weight: bold;
-    display: inline-block;
-    padding-left: 10px;
-    line-height: 2.15em;
+	display: inline-block;
+	padding-left: 10px;
+	line-height: 2.15em;
 }
 
 nav button {
-    padding: 0;
-    width: 85px;
-    height: 35px;
-    border: none;
-    font-size: 17px;
+	padding: 0;
+	width: 85px;
+	height: 35px;
+	border: none;
+	font-size: 17px;
 }
 
 .makeNewPost {
-    align-self:center;
-    background:transparent;
-    padding:1rem 1rem;
-    margin:0 1rem;
-    transition:all .5s ease;
-    color:white;
-    font-family: 'Patrick Hand SC', cursive;
-    text-shadow: 0 0 0.5em rgb(0, 0, 0), 0 0 0.5em rgb(0, 0, 0), 0 0 0.5em rgb(0, 0, 0), 0 0 0.5em rgb(0, 0, 0);
-    font-size:2rem;
-    letter-spacing:1px;
-    outline:none;
-    border:solid 7px #187e20;
-    box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
-    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+	display: inline-block;
+	align-self:center;
+	background:transparent;
+	padding:1rem 1rem;
+	margin:0 1rem;
+	transition:all .5s ease;
+	color:white;
+	font-family: 'Patrick Hand SC', cursive;
+	text-shadow: 0 0 0.5em rgb(0, 0, 0), 0 0 0.5em rgb(0, 0, 0), 0 0 0.5em rgb(0, 0, 0), 0 0 0.5em rgb(0, 0, 0);
+	font-size:2rem;
+	letter-spacing:1px;
+	outline:none;
+	border:solid 7px #187e20;
+	box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
+	border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
 }
 
 .makeNewPost:hover {
-    border: solid 7px #2be43a;
-    box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
+	border: solid 7px #2be43a;
+	box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
 }
 
 .makeNewPost:active {
-    position:relative;
-    top:2px;
+	position:relative;
+	top:2px;
+}
+
+#myHikesTitle {
+	color: white;
+	text-shadow: 0 0 0.5em rgb(0, 0, 0), 0 0 0.5em rgb(0, 0, 0), 0 0 0.5em rgb(0, 0, 0), 0 0 0.5em rgb(0, 0, 0);
 }
 
 /* This removes the white space between the buttons */
@@ -143,12 +149,12 @@ nav button {
 }
 
 .formSubmitButton:hover {
-    opacity: 0.8;
+	opacity: 0.8;
 }
 
 /* Extra styles for the cancel button */
 .cancelbtn {
-    font-size: 17px;
+	font-size: 17px;
 	background-color: #f44336;
 	font-family:Courier New;
 	font-size:17px;
@@ -166,14 +172,14 @@ nav button {
 
 /* Center the image and position the close button */
 .imgcontainer {
-    text-align: center;
-    /* margin: 24px 0 12px 0; */
-    position: relative;
+	text-align: center;
+	/* margin: 24px 0 12px 0; */
+	position: relative;
 }
 
 img.avatar {
-    width: 40%;
-    border-radius: 50%;
+	width: 40%;
+	border-radius: 50%;
 }
 
 .container {
@@ -214,35 +220,40 @@ span.psw {
 
 /* The Close Button (x) */
 .close {
-  position: absolute;
-  right: 10px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
-  padding-top: 2px;
+	position: absolute;
+	right: 10px;
+	top: 0;
+	color: #000;
+	font-size: 35px;
+	font-weight: bold;
+	padding-top: 2px;
 }
 
 fieldset {
-    border: none;
+	border: none;
+}
+
+#successfulRegister {
+	display: inline-block;
+	margin: 40px 0 20px 0px;
 }
 
 .close:hover,
 .close:focus {
-    color: red;
-    cursor: pointer;
+	color: red;
+	cursor: pointer;
 }
 
 /* Add Zoom Animation */
 .animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
+	-webkit-animation: animatezoom 0.6s;
+	animation: animatezoom 0.6s
 }
 
 /* Home page display */
 .loadedHome {
-    display: none;
-    /* margin-top: 55px; */
+	display: none;
+	/* margin-top: 55px; */
 }
 
 .posts {
@@ -250,36 +261,53 @@ fieldset {
 }
 
 #individualPosts {
-    color: white;
-    background-color: rgba(24, 126, 32, 0.6);
-    width: 100%;
-    position: relative;
-    margin-bottom: 10px;
-    padding: 10px;
+	color: white;
+	background-color: rgba(24, 126, 32, 0.6);
+	/* width: 100%; */
+	position: relative;
+	margin-bottom: 20px;
+	padding: 10px;
+	border: 5px solid white;
+	border-radius: 14px;
+}
+
+/* #postContent {
+	margin-bottom: 40px;
+} */
+
+#postContent h2 {
+	background-color: rgba(64, 54, 0, 0.7);
+	margin-bottom: 0;
+}
+
+#postContent p {
+	background-color: rgba(115, 97, 0, 0.6);
+	padding: 10px 0 10px 0;
+	margin-top: 0;
 }
 
 header {
-    color: white;
-    background-color: rgba(24, 126, 32, 0.6);
-    width: 100%;
+	color: white;
+	background-color: rgba(24, 126, 32, 0.6);
+	width: 100%;
 }
 
 .loadedHome {
-    width: 100%;
-    /* position: relative; */
+	width: 100%;
+	/* position: relative; */
 }
 
 .cssPostDate {
-    top: -10px;
-    right: 10px;
-    position: absolute;
+	top: -10px;
+	right: 10px;
+	position: absolute;
 }
 
-.postsEditDelete {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-}
+/* .postsEditDelete {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+} */
 
 .cssPostedBy {
 	position: absolute;
@@ -288,15 +316,15 @@ header {
 }
 
 .cssHikename {
-    background-color: rgba(242, 157, 0, 0.6);
-    margin-bottom: 0;
+	background-color: rgba(242, 157, 0, 0.6);
+	margin-bottom: 0;
 }
-    
+	
 .cssSeatsOpen {
-    background-color: rgba(255, 215, 0, 0.5);
-    color: black;
-    margin-top: 0;
-    padding: 10px 0 10px 0;
+	background-color: rgba(255, 215, 0, 0.5);
+	color: black;
+	margin-top: 0;
+	padding: 10px 0 10px 0;
 }
 
 .postsEditDelete button {
@@ -312,8 +340,8 @@ header {
 	padding:5px 11px;
 	text-decoration:none;
 	text-shadow:0px 0px 0px #2f6627;
-    border: none;
-    font-weight:bold;
+	border: none;
+	font-weight:bold;
 }
 
 .postsEditDelete button:hover {
@@ -326,62 +354,86 @@ header {
 }
 
 legend {
-    margin-right: auto;
-    margin-left: auto;
-    padding-top: 10px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 10px;
 }
 
 @-webkit-keyframes animatezoom {
-    from {-webkit-transform: scale(0)} 
-    to {-webkit-transform: scale(1)}
+	from {-webkit-transform: scale(0)} 
+	to {-webkit-transform: scale(1)}
 }
-    
+	
 @keyframes animatezoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
+	from {transform: scale(0)} 
+	to {transform: scale(1)}
 }
 
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    .cancelbtn, .formSubmitButton {
-       width: 100%;
-    }
+@media screen and (max-width: 450px) {
+	.cancelbtn, .formSubmitButton {
+	   width: 100%;
+	}
 }
 
 @media screen and (max-width: 420px) {
-    .navButtons {
-        width: 100%;
-    }
+	.navButtons {
+		width: 100%;
+	}
 
-    #userInNav {
-        display: block;
-        padding-left: 0;
-        text-align: center;
-    }
-    
-    .loggedIn {
-        width: 33.33333%;
-    }
+	#userInNav {
+		display: block;
+		padding-left: 0;
+		text-align: center;
+	}
+	
+	.loggedIn {
+		width: 33.33333%;
+	}
 
-    .notLoggedIn {
-        width: 50%;
-    }
-    
-    /* .navButtons {
-        width: 100%;
-    } */
-
-    /* nav button {
-        max-width: 50%;
-    } */
+	.notLoggedIn {
+		width: 50%;
+	}
+/* 
+	.cssPostDate {
+		left: 0;
+		right: 0;
+	}
+	
+	.cssPostedBy {
+		left: 0;
+		right: 0;
+		top: 13px;
+	}
+	
+	.cssHikename {
+		margin-top: 55px;
+	} */
 }
 
-@media screen and (max-width: 270px) {
-    .notLoggedIn, .loggedIn {
-        width: 100%;
-    }
+@media screen and (max-width: 300px) {
+	.notLoggedIn, .loggedIn {
+		width: 100%;
+	}
 
-    .navButtons {
-        display: contents;
-    }
+	.navButtons {
+		display: contents;
+	}
+}
+
+@media screen and (max-width: 510px) {
+	.cssPostDate {
+		left: 0;
+		right: 0;
+	}
+	
+	.cssPostedBy {
+		left: 0;
+		right: 0;
+		top: 13px;
+	}
+	
+	.cssHikename {
+		margin-top: 55px;
+	}
 }
