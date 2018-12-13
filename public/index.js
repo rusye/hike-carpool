@@ -147,9 +147,9 @@ function registerUser(newUserData) {
     dataType: 'json',
     contentType: 'application/json',
     success: function() {
-      removeForm();
-      let message = 'Create some popup giving them instructions to login now';
-      window.alert(message);
+      // removeForm();
+      document.getElementById('registerFieldset').remove();
+      $('#registerForm').append(`<span id='successfulRegister'>You have been successfully registered.  Please proceed to login with the credentials you have entered.</span>`)
     },
     error: function(data) {
       let message = 'There was a problem with your form: ' + data.responseText.message;
@@ -179,9 +179,10 @@ function logOutButton() {
 function homeButton() {
   $('.homeButton').on('click', function(e) {
     e.preventDefault();
+    document.getElementById('myHikesTitle').remove();
     $('.posts').empty();
     getAllPostsCall();
-    newHikeDisplay.style.display = 'block';
+    newHikeDisplay.style.display = 'inline-block';
   })
 };
 
@@ -194,9 +195,15 @@ function myHikesCall() {
     contentType: 'application/json',
     headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
     success: function(myposts) {
-      displayAllPostsTemplate(myposts.posts, myposts.username);
-      deletePost();
-      editPostButton();
+      if (myposts.posts.length === 0) {
+        $('.loadedHome').prepend(`<h1 id='myHikesTitle'>You haven't posted any hikes yet.</h1>`);
+      } else {
+        console.log(myposts.posts.length);
+        $('.loadedHome').prepend(`<h1 id='myHikesTitle'>My Hikes</h1>`);
+        displayAllPostsTemplate(myposts.posts, myposts.username);
+        deletePost();
+        editPostButton();
+      }
     }
   });
 };
@@ -316,22 +323,24 @@ function putHikeData(updatePostData) {
 function deletePost() {
   $('.deletePost').on('click', function(e) {
     e.preventDefault();
-    $.ajax({
-      url: '/posts/' + $(this).data('postid'),
-      method: 'DELETE',
-      dataType: 'json',
-      contentType: 'application/json',
-      headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
-      success: function() {
-        if(!(newHikeDisplay.style.display === 'none')) {
-          $('.posts').empty();
-          getAllPostsCall();
-        } else {
-          $('.posts').empty();
-          myHikesCall();
+    if (confirm('Are you sure you want to delete this post?')) {
+      $.ajax({
+        url: '/posts/' + $(this).data('postid'),
+        method: 'DELETE',
+        dataType: 'json',
+        contentType: 'application/json',
+        headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
+        success: function() {
+          if(!(newHikeDisplay.style.display === 'none')) {
+            $('.posts').empty();
+            getAllPostsCall();
+          } else {
+            $('.posts').empty();
+            myHikesCall();
+          }
         }
-      }
-    });
+      });
+    }
   })
 };
 
