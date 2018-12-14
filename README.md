@@ -27,11 +27,11 @@ Creating A Post Form
 Edit A Post Form
 ![Edit A Post Form](https://github.com/rusye/hike-carpool/blob/master/screenshots/editAPostForm.PNG)
 
-##Demo
+## Demo
 
 [Live app](https://mighty-cove-62437.herokuapp.com/)
 
-##Tech Stack
+## Tech Stack
 
 *Node.js
 *Express
