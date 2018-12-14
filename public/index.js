@@ -6,6 +6,8 @@ const home = document.getElementsByClassName('loadedHome')[0];
 
 const newHikeDisplay = document.getElementsByClassName('makeNewPost')[0];
 
+const myHikesTitleText = document.getElementById('myHikesTitle');
+
 
 // ++++++++++++++++++++++++++++++++++++
 // ++++++Nav bar before logging in+++++
@@ -147,7 +149,6 @@ function registerUser(newUserData) {
     dataType: 'json',
     contentType: 'application/json',
     success: function() {
-      // removeForm();
       document.getElementById('registerFieldset').remove();
       $('#registerForm').append(`<span id='successfulRegister'>You have been successfully registered.  Please proceed to login with the credentials you have entered.</span>`)
     },
@@ -179,7 +180,7 @@ function logOutButton() {
 function homeButton() {
   $('.homeButton').on('click', function(e) {
     e.preventDefault();
-    document.getElementById('myHikesTitle').remove();
+    myHikesTitleText.style.display = 'none';
     $('.posts').empty();
     getAllPostsCall();
     newHikeDisplay.style.display = 'inline-block';
@@ -196,10 +197,11 @@ function myHikesCall() {
     headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
     success: function(myposts) {
       if (myposts.posts.length === 0) {
-        $('.loadedHome').prepend(`<h1 id='myHikesTitle'>You haven't posted any hikes yet.</h1>`);
+        $('#myHikesTitle').text(`You haven't posted any hikes yet.`);
+        myHikesTitleText.style.display = 'block';
       } else {
-        console.log(myposts.posts.length);
-        $('.loadedHome').prepend(`<h1 id='myHikesTitle'>My Hikes</h1>`);
+        myHikesTitleText.innerHTML = `My Hikes`;
+        myHikesTitleText.style.display = 'block';
         displayAllPostsTemplate(myposts.posts, myposts.username);
         deletePost();
         editPostButton();
@@ -270,7 +272,6 @@ function editPostButton() {
   $('.editPost').on('click', function(e) {
     e.preventDefault();
     let postID = $(this).data('postid');
-    console.log(JSON.parse(localStorage.getItem(postID)));
     $('.forms').append(editHikePost(postID));
     closeAForm();
     modal.style.display = 'block';
