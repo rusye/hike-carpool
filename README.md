@@ -33,18 +33,18 @@ Edit A Post Form
 
 ## Tech Stack
 
-*Node.js
-*Express
-*HTML
-*CSS
-*Javascript/JQuery
-*MongoDB
-*passport.js
-*JWT Token
-*bcrypt
+* Node.js
+* Express
+* HTML
+* CSS
+* Javascript/JQuery
+* MongoDB
+* passport.js
+* JWT Token
+* bcrypt
 
 ### Testing
 
-*Mocha
-*Chai
-*Chai-http
+* Mocha
+* Chai
+* Chai-http
