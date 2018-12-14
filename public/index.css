@@ -1,13 +1,10 @@
 body {
-	/* font-family: Arial, Helvetica, sans-serif; */
 	font-family:Courier New;
 	max-width: 920px;
 	margin: auto;
 	height: calc(100vh - 55px);
 	background-image: url('https://farm5.static.flickr.com/4550/39045423782_3f652d5c5b_b.jpg');
 	background-size: cover;
-	/* background-color: orange; */
-	/* height: calc(100vh - 55px); */
 }
 
 /* Full-width input fields */
@@ -21,25 +18,14 @@ input[type=text], input[type=password], input[type=number], input[type=email] {
 }
 
 h1 {
-	/* padding-top: 10px; */
 	margin-top: 0;
 }
 
 main {
 	height: calc(100vh - 55px);
-	/* height: 100%; */
 	padding: 10px;
 	align-content: center;
 	text-align: center;
-	/* margin: auto; */
-	/* margin-top: 0; */
-	/* background-color: orange; */
-	/* display: flex; */
-	/* flex-direction: column; */
-	/* justify-content: center; */
-	/* resize: vertical; */
-	/* overflow: auto; */
-	/* align-items: center; */
 }
 
 #introPage {
@@ -56,6 +42,10 @@ nav {
 	margin: 0 10px 0 10px;
 	background-color: rgba(14, 75, 19, 0.6);
 	min-height: 35px;
+}
+
+button {
+	cursor:pointer;
 }
 
 .navButtons {
@@ -173,7 +163,6 @@ nav button {
 /* Center the image and position the close button */
 .imgcontainer {
 	text-align: center;
-	/* margin: 24px 0 12px 0; */
 	position: relative;
 }
 
@@ -197,25 +186,25 @@ span.psw {
 
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
   padding-top: 60px;
 }
 
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  margin: 5% auto 15% auto;
   border: 1px solid #888;
-  max-width: 500px; /* Could be more or less, depending on screen size */
+  max-width: 500px; 
 }
 
 /* The Close Button (x) */
@@ -253,7 +242,6 @@ fieldset {
 /* Home page display */
 .loadedHome {
 	display: none;
-	/* margin-top: 55px; */
 }
 
 #myHikesTitle {
@@ -267,17 +255,12 @@ fieldset {
 #individualPosts {
 	color: white;
 	background-color: rgba(24, 126, 32, 0.6);
-	/* width: 100%; */
 	position: relative;
 	margin-bottom: 20px;
 	padding: 10px;
 	border: 5px solid white;
 	border-radius: 14px;
 }
-
-/* #postContent {
-	margin-bottom: 40px;
-} */
 
 #postContent h2 {
 	background-color: rgba(64, 54, 0, 0.7);
@@ -298,7 +281,6 @@ header {
 
 .loadedHome {
 	width: 100%;
-	/* position: relative; */
 }
 
 .cssPostDate {
@@ -306,12 +288,6 @@ header {
 	right: 10px;
 	position: absolute;
 }
-
-/* .postsEditDelete {
-	position: absolute;
-	bottom: 10px;
-	right: 10px;
-} */
 
 .cssPostedBy {
 	position: absolute;
@@ -349,8 +325,9 @@ header {
 }
 
 .postsEditDelete button:hover {
-	background-color:#5cbf2a;
-	}
+	background-color: #2be43a;
+	color: black;
+}
 
 .postsEditDelete button:active{
 	position:relative;
@@ -398,21 +375,6 @@ legend {
 	.notLoggedIn {
 		width: 50%;
 	}
-/* 
-	.cssPostDate {
-		left: 0;
-		right: 0;
-	}
-	
-	.cssPostedBy {
-		left: 0;
-		right: 0;
-		top: 13px;
-	}
-	
-	.cssHikename {
-		margin-top: 55px;
-	} */
 }
 
 @media screen and (max-width: 300px) {
