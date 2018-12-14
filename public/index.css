@@ -256,6 +256,10 @@ fieldset {
 	/* margin-top: 55px; */
 }
 
+#myHikesTitle {
+	display: none;
+}
+
 .posts {
 	margin-top: 10px;
 }
