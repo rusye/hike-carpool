@@ -85,8 +85,6 @@ function displayAllPostsTemplate(posts, username) {
     let hikename = JSON.stringify(`${post.hikename}`);
     let openseats = JSON.stringify(`${post.openseats}`);
     let content = JSON.stringify(`${post.content}`);
-
-    console.log(post.hikename);
     
     $('.posts').prepend(`
       <section id='individualPosts'>
@@ -153,7 +151,6 @@ function newHikePost() {
 };
 
 function editHikePost(postID) {
-  console.log(postID);
   let post = JSON.parse(localStorage.getItem(postID));
   let hikename = post.hikename.replace(/"/g, "&quot;").replace(/'/g, "&#039");
   let content = post.content.replace(/"/g, "&quot;").replace(/'/g, "&#039");
