@@ -1,4 +1,3 @@
-const uuid = require('uuid');
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
@@ -18,16 +17,6 @@ const postSchema = mongoose.Schema({
   content: {type: String, required: true},
   date: {type: String, default: local}
 });
-
-// postSchema.pre('find', function(next) {
-//   this.populate('user');
-//   next();
-// });
-
-// postSchema.pre('findById', function(next) {
-//   this.populate('user');
-//   next();
-// });
 
 postSchema.methods.serialize = function() {
   return {

@@ -1,15 +1,12 @@
 'use strict';
 
 const express = require('express');
-// const bodyParser = require('body-parser');
 const passport = require('passport');
 
 const {User} = require('./models');
 const {Posts} = require('../models');
 
 const router = express.Router();
-
-// const jsonParser = bodyParser.json();
 
 const {router: localStrategy, jwtStrategy} = require('../auth');
 passport.use(localStrategy);

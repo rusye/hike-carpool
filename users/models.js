@@ -16,11 +16,6 @@ const UserSchema = mongoose.Schema({
   posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Posts'}]
 });
 
-// UserSchema.pre('find', function(next) {
-//   this.populate('posts');
-//   next();
-// });
-
 UserSchema.methods.serialize = function() {
   return {
     id: this._id,
