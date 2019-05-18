@@ -24,6 +24,7 @@ function logInTemplate() {
             <button type='button' class='cancelbtn '>Cancel</button>
           </section>
         </section>
+        <p class='demoLogin'>Demo Username & Password: asdf</p>
       </fieldset>
     </form>
   `
